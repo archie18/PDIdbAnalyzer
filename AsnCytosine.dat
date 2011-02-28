@@ -1,0 +1,9 @@
+# PDIdb analysis by PDIdbAnalyzer.jar v0.1
+# by Andreas Schueller <aschueller@bio.puc.cl>. Credits to Tomas Norambuena <tanoramb@gmail.com>.
+# Detailed effective interactions
+# 1: DNA; 2: Protein
+# ResName_1	ResIndex_1	ChainID_1	AtmName_1	Element	AtmIndex	Coord_x	Coord_y	Coord_z	ResName_2	ResIndex_2	ChainID_2	AtmName_2	Element	AtmIndex	Coord_x	Coord_y	Coord_z	Distance	Interaction_Type	Interaction_Class	Groove
+DC	424	B	O2	O	25	-1.317	22.616	65.41	ASN	23	A	ND2	N	9	0.674	24.417	64.589	2.807	3	1	
+DC	424	B	N3	N	26	0.361	21.416	64.402	ASN	23	A	OD1	O	8	2.243	23.022	63.768	2.554	20	6	
+DC	424	B	N3	N	26	0.361	21.416	64.402	ASN	23	A	ND2	N	9	0.674	24.417	64.589	3.023	1	1	
+DC	424	B	N4	N	28	2.026	20.164	63.391	ASN	23	A	OD1	O	8	2.243	23.022	63.768	2.891	5	1	
