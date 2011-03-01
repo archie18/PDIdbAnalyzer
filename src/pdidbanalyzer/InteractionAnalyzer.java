@@ -170,46 +170,6 @@ public class InteractionAnalyzer {
             }
         }
         
-//        // Nested loop over all atoms to get all possible atom pairs ignoring
-//        // the order (A-B := B-A)
-//        for (int i = 0; i < pdbPolymer.getAtomCount(); i++) {
-//            for (int j = i + 1; j < pdbPolymer.getAtomCount(); j++) {
-//                
-//                if (log.isTraceEnabled()) {
-//                    log.trace("Interaction:");
-//                    log.trace(pdbPolymer.getAtom(i).toString());
-//                    log.trace(pdbPolymer.getAtom(i).getProperty(IAtomType.class).toString());
-//                    log.trace(pdbPolymer.getAtom(j).toString());
-//                    log.trace(pdbPolymer.getAtom(j).getProperty(IAtomType.class).toString());
-//                    log.trace("Distance={}", distanceMatrix[i][j]);
-//                }
-//                
-//                // Safeguard for null atom types
-//                if (pdbPolymer.getAtom(i).getProperty(IAtomType.class) == null || pdbPolymer.getAtom(j).getProperty(IAtomType.class) == null) {
-//                    log.trace("Ignoring interactions of atoms with atom type: null");
-//                    continue;
-//                }
-//                
-//                // Make sure the two atoms are of different biochemical nature
-//                // (protein, DNA, water) and its distance is <= distanceCutoff
-//                // and the interaction is effective.
-//                if (!pdbPolymer.getAtom(i).getProperty(IAtomType.class).getClass().equals(pdbPolymer.getAtom(j).getProperty(IAtomType.class).getClass()) &&
-//                        (distanceMatrix[i][j] <= distanceCutoff) &&
-//                        isEffectiveInteraction(i, j)) {
-//                    log.debug("Effective interaction within cutoff range");
-//                    PDIdbInteractionType intType = interactionTyper.getInteractionType(pdbPolymer.getAtom(i), pdbPolymer.getAtom(j));
-//                        log.debug("Interaction type: {}", intType);
-//                    if (intType != null) {
-//                        // Format output
-//                        String output = outputFormatter.format(intType, (IPDBAtom) pdbPolymer.getAtom(i), (IPDBAtom) pdbPolymer.getAtom(j), distanceMatrix[i][j], pdbPolymer);
-//                        log.debug("Interaction output: {}", output);
-//                        // Print output
-//                        out.println(output);
-//                    }
-//                }
-//            }
-//        }
-        
         // Loop over all DNA atoms
         for (Integer i : dnaAtomIndices) {
             // Loop over all protein atoms
@@ -304,54 +264,6 @@ public class InteractionAnalyzer {
 
             return firstAtom.angle(secondAtom);
     }    
-
-//    /**
-//     * Determines whether the interaction between atom1 and atom2 is effective
-//     * according to Ferrara & Melo, Protein Science (2009) 18, 1469-1485.
-//     * @param atom1Idx Index of atom1
-//     * @param atom2idx Index of atom2
-//     * @return true if the interaction is effective, false otherwise.
-//     */
-//    private boolean isEffectiveInteraction(int atom1Idx, int atom2Idx) {
-//
-//        log.trace("start isEffectiveInteraction");
-//        // Sort atoms by increasing distance to atom1
-//        List<IAtom> neighborhood = new ArrayList<IAtom>();
-//        for (int atom3Idx = 0; atom3Idx < pdbPolymer.getAtomCount(); atom3Idx++) {
-//            if (atom3Idx != atom1Idx) {
-//                // Get distance from the lower triangle of the distance matrix
-//                double distance;
-//                if (atom1Idx < atom3Idx) {
-//                    distance = distanceMatrix[atom1Idx][atom3Idx];
-//                } else {
-//                    distance = distanceMatrix[atom3Idx][atom1Idx];
-//                }
-//                pdbPolymer.getAtom(atom3Idx).setProperty(distanceProperty, distance);
-//                neighborhood.add(pdbPolymer.getAtom(atom3Idx));
-//            }
-//        }
-//        Collections.sort(neighborhood, new AtomByDistanceComparator());
-//        
-//        // Iterate over sorted atoms
-//        boolean isEffective = true;
-//        for (IAtom atom : neighborhood) {
-//            // Stop when atom2 is reached in the sorted list of atoms
-//            if (atom.equals(pdbPolymer.getAtom(atom2Idx))) {
-//                break;
-//            }
-//            
-//            // Ensure angle <= omega, if not the interaction is not effective
-//            log.trace("Atom={}", ((IPDBAtom) atom).getName());
-//            double angle = InteractionAnalyzer.getAngle(atom, pdbPolymer.getAtom(atom1Idx), pdbPolymer.getAtom(atom2Idx));
-//            if (angle > omega) {
-//                isEffective = false;
-//                break;
-//            }
-//        }
-//        
-//        log.trace("end isEffectiveInteraction: {}", isEffective);
-//        return isEffective;
-//    }
 
     /**
      * Determines whether the interaction between atom1 and atom2 is effective
