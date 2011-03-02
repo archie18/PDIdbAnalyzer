@@ -5,6 +5,10 @@
     <atomType id="TRP.CZ2" ><atom elementType="N"/>
     <atomType id="TRP.CZ3" ><atom elementType="O"/>
     <atomType id="TRP.N"   ><atom elementType="C"/>
+    <atomType id="GLN.2HE2"><atom elementType="C"/>
+    <atomType id="GLN.CD"  ><atom elementType="N"/>
+    <atomType id="GLN.N"   ><atom elementType="O"/>
+    <atomType id="GLN.NE2" ><atom elementType="O"/>
 
 -->
 <atomTypeList xmlns="http://www.xml-cml.org/schema"
@@ -146,14 +150,14 @@
   <atomType id="GLN.2HG" ><atom elementType="H"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.2</scalar></atomType>
   <atomType id="GLN.3HG" ><atom elementType="H"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.2</scalar></atomType>
   <atomType id="GLN.1HE2"><atom elementType="H"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.2</scalar></atomType>
-  <atomType id="GLN.2HE2"><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.2</scalar></atomType>
+  <atomType id="GLN.2HE2"><atom elementType="H"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.2</scalar></atomType>
   <atomType id="GLN.C"   ><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
   <atomType id="GLN.CA"  ><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.9</scalar></atomType>
   <atomType id="GLN.CB"  ><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.9</scalar></atomType>
   <atomType id="GLN.CG"  ><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.9</scalar></atomType>
-  <atomType id="GLN.CD"  ><atom elementType="N"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
-  <atomType id="GLN.N"   ><atom elementType="O"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
-  <atomType id="GLN.NE2" ><atom elementType="O"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
+  <atomType id="GLN.CD"  ><atom elementType="C"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
+  <atomType id="GLN.N"   ><atom elementType="N"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
+  <atomType id="GLN.NE2" ><atom elementType="N"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.7</scalar></atomType>
   <atomType id="GLN.O"   ><atom elementType="O"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.4</scalar></atomType>
   <atomType id="GLN.OE1" ><atom elementType="O"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.4</scalar></atomType>
   <atomType id="GLN.OXT" ><atom elementType="O"/><scalar dataType="xsd:double" dictRef="emboss:vdwrad">1.4</scalar></atomType>
