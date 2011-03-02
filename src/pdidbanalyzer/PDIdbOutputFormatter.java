@@ -5,6 +5,7 @@
 
 package pdidbanalyzer;
 
+import java.text.DecimalFormat;
 import org.openscience.cdk.interfaces.IPDBAtom;
 import org.openscience.cdk.interfaces.IPDBPolymer;
 
@@ -40,6 +41,10 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
             atom2 = tempAtom;
         }
         
+        // DecimalFormat for decimals without training zeros
+        // String.format("%.3f") doesn't do the trick
+        DecimalFormat df = new DecimalFormat("#.###");
+        
         // Build a line of output
         StringBuilder stringBuilder = new StringBuilder();
         // First atom
@@ -49,9 +54,9 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         stringBuilder.append(atom1.getName()).append(separator);
         stringBuilder.append(atom1.getSymbol()).append(separator);
         stringBuilder.append(atom1.getSerial()).append(separator);
-        stringBuilder.append(atom1.getPoint3d().x).append(separator);
-        stringBuilder.append(atom1.getPoint3d().y).append(separator);
-        stringBuilder.append(atom1.getPoint3d().z).append(separator);
+        stringBuilder.append(df.format(atom1.getPoint3d().x)).append(separator);
+        stringBuilder.append(df.format(atom1.getPoint3d().y)).append(separator);
+        stringBuilder.append(df.format(atom1.getPoint3d().z)).append(separator);
         // Second atom
         stringBuilder.append(atom2.getResName()).append(separator);
         stringBuilder.append(atom2.getResSeq()).append(separator);
@@ -59,11 +64,11 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         stringBuilder.append(atom2.getName()).append(separator);
         stringBuilder.append(atom2.getSymbol()).append(separator);
         stringBuilder.append(atom2.getSerial()).append(separator);
-        stringBuilder.append(atom2.getPoint3d().x).append(separator);
-        stringBuilder.append(atom2.getPoint3d().y).append(separator);
-        stringBuilder.append(atom2.getPoint3d().z).append(separator);
+        stringBuilder.append(df.format(atom2.getPoint3d().x)).append(separator);
+        stringBuilder.append(df.format(atom2.getPoint3d().y)).append(separator);
+        stringBuilder.append(df.format(atom2.getPoint3d().z)).append(separator);
         // Interaction information
-        stringBuilder.append(String.format("%.3f", distance)).append(separator);
+        stringBuilder.append(df.format(distance)).append(separator);
         stringBuilder.append(interactionType.getTypeInt()).append(separator);
         stringBuilder.append(interactionType.getInteractionClass().getTypeInt()).append(separator);
         // TO-DO: Add groove info here
