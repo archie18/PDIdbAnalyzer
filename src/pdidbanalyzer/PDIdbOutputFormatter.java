@@ -5,12 +5,11 @@
 
 package pdidbanalyzer;
 
-import javax.vecmath.Point3d;
 import org.openscience.cdk.interfaces.IPDBAtom;
 import org.openscience.cdk.interfaces.IPDBPolymer;
 
 /**
- * 
+ * Formats the interaction analysis output according to PDIdb standards
  * @author archvile18
  */
 public class PDIdbOutputFormatter implements IOutputFormatter {
@@ -68,6 +67,7 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         stringBuilder.append(interactionType.getTypeInt()).append(separator);
         stringBuilder.append(interactionType.getInteractionClass().getTypeInt()).append(separator);
         // TO-DO: Add groove info here
+        stringBuilder.append(atom1.getProperty(PDIdbGrooveType.class));
         return stringBuilder.toString();
     }
 

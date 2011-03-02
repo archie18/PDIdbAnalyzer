@@ -10,7 +10,7 @@ package pdidbanalyzer;
  * backbone or not assigned.
  * @author andreas
  */
-public enum GrooveType {
+public enum PDIdbGrooveType {
     /** Major groove ("wide") */
     W,
     

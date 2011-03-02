@@ -108,8 +108,13 @@ public class PDIdbAnalyzer {
                 }
             }
 
+            // Perform atom typing
             PDIdbAtomTyper atomTyper = new PDIdbAtomTyper().setPdbPolymer(pdbPolymer);
             atomTyper.run();
+            
+            // Perform groove tryping
+            PDIdbGrooveTyper grooveTyper = new PDIdbGrooveTyper().setPdbPolymer(pdbPolymer);
+            grooveTyper.run();
             
             // Create the output PrintStream to a file with name: <pdbFile_basename>.dat
             PrintStream out = null;

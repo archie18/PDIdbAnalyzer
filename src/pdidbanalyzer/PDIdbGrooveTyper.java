@@ -12,10 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Assignes a GrooveType to DNA atoms
+ * Assignes a PDIdbGrooveType to DNA atoms
  * @author andreas
  */
-public class GrooveTyper {
+public class PDIdbGrooveTyper {
     
     /** slf4j logging */
     private static final Logger log = LoggerFactory.getLogger(PDIdbAtomTyper.class);
@@ -23,7 +23,7 @@ public class GrooveTyper {
     /** The PDB polymer */
     private IPDBPolymer pdbPolymer;
 
-    public GrooveTyper setPdbPolymer(IPDBPolymer pdbPolymer) {
+    public PDIdbGrooveTyper setPdbPolymer(IPDBPolymer pdbPolymer) {
         this.pdbPolymer = pdbPolymer;
         return this;
     }
@@ -41,6 +41,7 @@ public class GrooveTyper {
             if ("OP1".equals(pdbAtom.getName()) ||
                 "OP2".equals(pdbAtom.getName()) ||
                 "OP3".equals(pdbAtom.getName()) ||
+                "P".equals(pdbAtom.getName()) ||
                 "O5'".equals(pdbAtom.getName()) ||
                 "C1'".equals(pdbAtom.getName()) ||
                 "C2'".equals(pdbAtom.getName()) ||
@@ -49,7 +50,7 @@ public class GrooveTyper {
                 "C5'".equals(pdbAtom.getName()) ||
                 "O3'".equals(pdbAtom.getName())) {
                                 
-                pdbAtom.setProperty(GrooveType.class, GrooveType.B);
+                pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.B);
             }
             
             // Major groove "W"
@@ -95,7 +96,7 @@ public class GrooveTyper {
                      ("C7".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
                      ("C7".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName()))) {
 
-                pdbAtom.setProperty(GrooveType.class, GrooveType.W);
+                pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.W);
             }
             
             // Minor groove "S"
@@ -129,7 +130,7 @@ public class GrooveTyper {
                      ("N3".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
                      ("N3".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName()))) {
 
-                pdbAtom.setProperty(GrooveType.class, GrooveType.S);
+                pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.S);
             }
             
             // Not assigned "N"
@@ -149,7 +150,7 @@ public class GrooveTyper {
                      ("N1".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
                      ("N1".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName()))) {
 
-                pdbAtom.setProperty(GrooveType.class, GrooveType.N);
+                pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.N);
             }
         }
     }
