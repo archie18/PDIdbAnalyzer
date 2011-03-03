@@ -131,7 +131,7 @@ public class CommandLineParameters {
    * @return the name of the input PDB file or directory name
    */
   String getPdbFileOption( ) {
-    return commandLine.getOptionValue("f");
+    return commandLine.getOptionValue("f").trim();
   }
   
 }
