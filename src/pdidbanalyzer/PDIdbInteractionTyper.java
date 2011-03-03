@@ -84,7 +84,9 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
     }
     
     /**
-     * Returns true if the atom is a DNA base edge carbon (CH) donor
+     * Returns true if the atom is a DNA base edge carbon (CH) donor.
+     * Only applies to cytosine C5 and thymine C7 according to:
+     * Mandel-Gutfreund et al. J. Mol. Biol. 1998, 277, 1129-1140
      * @param atom an atom
      * @return true if the atom is a DNA base edge carbon (CH) donor
      */
@@ -94,10 +96,10 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
             return false;
         PDIdbDNAAtomType type = (PDIdbDNAAtomType) atom.getProperty(IAtomType.class);
-        if (PDIdbDNAAtomType.C8.equals(type) ||
-                PDIdbDNAAtomType.AC2.equals(type) ||
+        if (//PDIdbDNAAtomType.C8.equals(type) ||
+                //PDIdbDNAAtomType.AC2.equals(type) ||
                 PDIdbDNAAtomType.CC5.equals(type) ||
-                PDIdbDNAAtomType.PyC6.equals(type) ||
+                //PDIdbDNAAtomType.PyC6.equals(type) ||
                 PDIdbDNAAtomType.TC7.equals(type))
             return true;
 
