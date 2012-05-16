@@ -5,6 +5,8 @@
 
 package pdidbanalyzer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -41,14 +43,14 @@ public class PDIdbAnalyzerTest {
     public void tearDown() {
     }
     
-    String readFile(String fileName) throws FileNotFoundException, IOException {
+    List<String> readFile(String fileName) throws FileNotFoundException, IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        StringBuilder sb = new StringBuilder();
+        List<String> data = new ArrayList<String>();
         String line;
         while ((line = reader.readLine()) != null) {
-            sb.append(line);
+            data.add(line);
         }
-        return line;
+        return data;
     }
 
     /**
@@ -57,12 +59,16 @@ public class PDIdbAnalyzerTest {
     @Test
     public void testMain() throws FileNotFoundException, IOException {
         System.out.println("main");
-        String[] args = new String[1];
+        String[] args = new String[2];
         args[0] = "-f testdata/1bl0_1_1.ent.gz";
+        args[1] = "-m 2";
         PDIdbAnalyzer.main(args);
-        String expResult = readFile("testdata/1bl0_1_1.dat");
-        String result = readFile("1bl0_1_1.dat");
-        assertEquals(expResult, result);
+        List<String> expResult = readFile("testdata/1bl0_1_1.dat");
+        List<String> result = readFile("1bl0_1_1.dat");
+        for (int i = 0; i < result.size(); i++) {
+            assertEquals("Line " + (i+1), expResult.get(i), result.get(i));
+        }
+        
     }
 
 }

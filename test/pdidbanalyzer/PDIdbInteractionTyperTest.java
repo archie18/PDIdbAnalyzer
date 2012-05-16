@@ -65,7 +65,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.TRP_N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_NA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.Imine);
@@ -116,7 +116,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_NA_OD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.Imine);
@@ -139,7 +139,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.TRP_N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_OA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.CarbonylO);
@@ -190,7 +190,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_OA_OD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.CarbonylO);
@@ -213,7 +213,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_ND_OA;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.PrmN);
@@ -278,7 +278,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PBB_NA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.Imine);
@@ -308,7 +308,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PBB_ND_OA;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.PrmN);
@@ -345,7 +345,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PBB_OA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.CarbonylO);
@@ -375,7 +375,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.TRP_N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBB_PSC_OA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.OP1OP2OP3);
@@ -531,7 +531,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBB_PSC_OA_OD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.OP1OP2OP3);
@@ -596,7 +596,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBB_PBB_OA_ND;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.OP1OP2OP3);
@@ -682,7 +682,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.CYS_S);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBB_PSC_OA_SD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.O3PrO5Pr);
@@ -719,7 +719,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.CYS_S);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_NA_SD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
     }
 
@@ -735,7 +735,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.CYS_S);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_OA_SD;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
     }
 
@@ -751,7 +751,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.CYS_S);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_ND_SA;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.PrmN);
@@ -788,7 +788,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.C8);
@@ -909,7 +909,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.C8);
@@ -974,7 +974,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.LYS_N);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.ION;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.OP1OP2OP3);
@@ -1011,7 +1011,7 @@ public class PDIdbInteractionTyperTest {
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.CA, "C", "fubar");
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.HPH;
-        PDIdbInteractionType result = instance.getInteractionType(atom1, atom2);
+        IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.C5Pr, "C", "fubar");
