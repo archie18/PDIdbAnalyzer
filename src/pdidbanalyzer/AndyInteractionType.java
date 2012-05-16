@@ -6,10 +6,19 @@
 package pdidbanalyzer;
 
 /**
- *
+ * Based on PDIdbInteractionType adding new types:
+ * <ul>
+ *     <li>21: DBE-PSC: ND-NA (His ND1)</li>
+ *     <li>22: DBB-PSC: OD-NA (DNA O3' terminal)</li>
+ *     <li>23: DBB-PSC: OD-OA (DNA O3' terminal)</li>
+ *     <li>24: DBB-PBB: OD-OA (DNA O3' terminal)</li>
+ *     <li>25: DBB-PSC: OD-SA (DNA O3' terminal)</li>
+ *     <li>26: (-)...(-): Ionic bond assuming invisible cation. Now distinct
+ *         from type 18 (+)...(-)</li>
+ * </ul>
  * @author archvile18
  */
-public enum PDIdbInteractionType implements IInteractionType {
+public enum AndyInteractionType implements IInteractionType {
     
     /** Type 1 */
     DBE_PSC_NA_ND(1, PDIdbInteractionClass.CHb),
@@ -69,7 +78,26 @@ public enum PDIdbInteractionType implements IInteractionType {
     HPH(19, PDIdbInteractionClass.Hph),
     
     /** Type 20 */
-    OTHER(20, PDIdbInteractionClass.Other);
+    OTHER(20, PDIdbInteractionClass.Other),
+
+    /** Type 21: DBE-PSC: ND-NA (His ND1) */
+    DBE_PSC_ND_NA(21, PDIdbInteractionClass.CHb),
+
+    /** Type 22: DBB-PSC: OD-NA (DNA O3' terminal) */
+    DBB_PSC_OD_NA(22, PDIdbInteractionClass.CHb),
+
+    /** Type 23: DBB-PSC: OD-OA (DNA O3' terminal) */
+    DBB_PSC_OD_OA(23, PDIdbInteractionClass.CHb),
+
+    /** Type 24: DBB-PBB: OD-OA (DNA O3' terminal) */
+    DBB_PBB_OD_OA(24, PDIdbInteractionClass.CHb),
+
+    /** Type 25: DBB-PSC: OD-SA (DNA O3' terminal) */
+    DBB_PSC_OD_SA(25, PDIdbInteractionClass.SHb),
+
+    /** Type 26: (-)...(-): Ionic bond assuming invisible cation. Now distinct
+                 from type 18 (+)...(-) */
+    ION_NEG_NEG(26, PDIdbInteractionClass.Ion);
     
     /** Type int */
     private int typeInt;
@@ -77,7 +105,7 @@ public enum PDIdbInteractionType implements IInteractionType {
     /** Interaction class ("super" type) */
     private PDIdbInteractionClass interactionClass;
 
-    private PDIdbInteractionType(int typeInt, PDIdbInteractionClass interactionClass) {
+    private AndyInteractionType(int typeInt, PDIdbInteractionClass interactionClass) {
         this.typeInt = typeInt;
         this.interactionClass = interactionClass;
     }

@@ -83,7 +83,7 @@ public enum PDIdbProteinAtomType implements IAtomType {
     /** Type 24: Side chain CH sp2 bound to N sp2 in Trp (CD1) and His (CD2) */
     TRP_HIS_CH(24),
     
-    /** Type 25: Side chain histidine NH sp2 (donor) bound to HIS_CD2 */
+    /** Type 25: Side chain histidine NE2 (NH, sp2, donor) bound to HIS_CD2 */
     HIS_NE2(25),
     
     /** Type 26: Side chain histidine C sp2 bound to HIS_ND1 and HIS_NE2 */
@@ -122,7 +122,7 @@ public enum PDIdbProteinAtomType implements IAtomType {
     /** Type 37: Side chain arginine CH2 sp3 bound to ARG_NE */
     ARG_CD(37),
     
-    /** Type 38: Side chain histidine -N= sp2 (acceptor) bound to HIS_CG */
+    /** Type 38: Side chain histidine ND1 (-N=, sp2, acceptor) bound to HIS_CG */
     HIS_ND1(38),
     
     /** Type 39: Side chain tryptophan indole N */

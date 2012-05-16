@@ -22,7 +22,7 @@ public interface IOutputFormatter {
      * @param distance
      * @param pdbPolymer 
      */
-    public String format(PDIdbInteractionType interactionType, IPDBAtom atom1, IPDBAtom atom2, double distance, IPDBPolymer pdbPolymer);
+    public String format(IInteractionType interactionType, IPDBAtom atom1, IPDBAtom atom2, double distance, IPDBPolymer pdbPolymer);
     
     /**
      * Returns the text header for the generated output. This header should

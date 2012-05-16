@@ -19,7 +19,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a DNA base edge nitrogen acceptor
      */
-    private boolean isDnaBaseEdgeNitrogenAcceptor(IAtom atom) {
+    protected boolean isDnaBaseEdgeNitrogenAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -35,7 +35,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a DNA base edge oxygen acceptor
      */
-    private boolean isDnaBaseEdgeOxygenAcceptor(IAtom atom) {
+    protected boolean isDnaBaseEdgeOxygenAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -51,7 +51,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a DNA base edge nitrogen donor
      */
-    private boolean isDnaBaseEdgeNitrogenDonor(IAtom atom) {
+    protected boolean isDnaBaseEdgeNitrogenDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -68,7 +68,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a DNA backbone oxygen acceptor
      */
-    private boolean isDnaBackboneOxygenAcceptor(IAtom atom) {
+    protected boolean isDnaBackboneOxygenAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -90,7 +90,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a DNA base edge carbon (CH) donor
      */
-    private boolean isDnaBaseEdgeCarbonDonor(IAtom atom) {
+    protected boolean isDnaBaseEdgeCarbonDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -111,7 +111,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the DNA atom is DNA and an ion
      */
-    private boolean isDnaAnion(IAtom atom) {
+    protected boolean isDnaAnion(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -127,7 +127,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the DNA atom is DNA and a carbon
      */
-    private boolean isDnaCarbon(IAtom atom) {
+    protected boolean isDnaCarbon(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbDNAAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -143,7 +143,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein side chain nitrogen donor
      */
-    private boolean isProteinSideChainNitrogenDonor(IAtom atom) {
+    protected boolean isProteinSideChainNitrogenDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -165,7 +165,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein side chain oxygen donor
      */
-    private boolean isProteinSideChainOxygenDonor(IAtom atom) {
+    protected boolean isProteinSideChainOxygenDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -183,7 +183,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein side chain oxygen acceptor
      */
-    private boolean isProteinSideChainOxygenAcceptor(IAtom atom) {
+    protected boolean isProteinSideChainOxygenAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -203,7 +203,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein backbone nitrogen donor
      */
-    private boolean isProteinBackboneNitrogenDonor(IAtom atom) {
+    protected boolean isProteinBackboneNitrogenDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -225,7 +225,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein backbone oxygen acceptor
      */
-    private boolean isProteinBackboneOxygenAcceptor(IAtom atom) {
+    protected boolean isProteinBackboneOxygenAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -245,7 +245,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein side chain sulphur donor
      */
-    private boolean isProteinSideChainSulphurDonor(IAtom atom) {
+    protected boolean isProteinSideChainSulphurDonor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -261,7 +261,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a protein side chain sulphur acceptor
      */
-    private boolean isProteinSideChainSulphurAcceptor(IAtom atom) {
+    protected boolean isProteinSideChainSulphurAcceptor(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -281,7 +281,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @param atom an atom
      * @return true if the atom is a proteinic and a cation
      */
-    private boolean isProteinCation(IAtom atom) {
+    protected boolean isProteinCation(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -296,13 +296,34 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
 
         return false;
     }
+
+    /**
+     * Returns true if the atom is a proteinic and an anion. The present
+     * definition includes the side chain carboxyl oxygens of aspartic and
+     * glutamic acid, as well as the back bone carboxyl terminal.
+     * @param atom an atom
+     * @return true if the atom is a proteinic and a cation
+     */
+    protected boolean isProteinAnion(IAtom atom) {
+        if (atom.getProperty(IAtomType.class) == null)
+            return false;
+        if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
+            return false;
+        PDIdbProteinAtomType type = (PDIdbProteinAtomType) atom.getProperty(IAtomType.class);
+        // TO-DO: As of now protein atom type ASP_GLU_O includes the C-terminal
+        // back bone COO- group. But that might change in the future.
+        if (PDIdbProteinAtomType.ASP_GLU_O.equals(type))
+            return true;
+
+        return false;
+    }
     
     /**
      * Returns true if the atom is proteinic and a carbon
      * @param atom an atom
      * @return true if the DNA atom is proteinic and a carbon
      */
-    private boolean isProteinCarbon(IAtom atom) {
+    protected boolean isProteinCarbon(IAtom atom) {
         if (atom.getProperty(IAtomType.class) == null)
             return false;
         if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
@@ -321,7 +342,7 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
      * @return the interaction type
      */
     @Override
-    public PDIdbInteractionType getInteractionType(IAtom atom1, IAtom atom2) {
+    public IInteractionType getInteractionType(IAtom atom1, IAtom atom2) {
         // Ensure first atom is DNA
         if (!atom1.getProperty(IAtomType.class).getClass().equals(PDIdbDNAAtomType.class)) {
             // Switch second atom to first atom if it is DNA
@@ -428,8 +449,10 @@ public class PDIdbInteractionTyper implements IInteractionTyper {
             return PDIdbInteractionType.DBE_PBB_CD_OA;
         }
 
-        // Type 18: Ionic interaction: (-)...(+)
-        else if (isDnaAnion(atom1) && isProteinCation(atom2)) {
+        // Type 18: Ionic interaction: (-)...(+) and (-)...(-) where an
+        //          invisible cation is assumed nearby
+        else if ((isDnaAnion(atom1) && isProteinCation(atom2)) ||
+                  isDnaAnion(atom1) && isProteinAnion(atom2)) {
             return PDIdbInteractionType.ION;
         }
 

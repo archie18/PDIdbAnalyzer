@@ -32,7 +32,7 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
      * @param pdbPolymer 
      */
     @Override
-    public String format(PDIdbInteractionType interactionType, IPDBAtom atom1, IPDBAtom atom2, double distance, IPDBPolymer pdbPolymer) {
+    public String format(IInteractionType interactionType, IPDBAtom atom1, IPDBAtom atom2, double distance, IPDBPolymer pdbPolymer) {
         // Ensure first atom is DNA
         if (atom1.getProperty(IAtomType.class).getClass().equals(PDIdbProteinAtomType.class) &&
                 atom2.getProperty(IAtomType.class).getClass().equals(PDIdbDNAAtomType.class)) {
@@ -41,7 +41,7 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
             atom2 = tempAtom;
         }
         
-        // DecimalFormat for decimals without training zeros
+        // DecimalFormat for decimals without trailing zeros
         // String.format("%.3f") doesn't do the trick
         DecimalFormat df = new DecimalFormat("#.###");
         
@@ -80,8 +80,8 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
     public String getHeader() {
         // Build the header
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append('\n');
-        stringBuilder.append("# by Andreas Schueller <aschueller@bio.puc.cl>. Credits to Tomas Norambuena <tanoramb@gmail.com>.").append('\n');
+        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (original mode)").append('\n');
+        stringBuilder.append("# by Andreas Schueller <aschueller@bio.puc.cl>. Based on the works of Tomas Norambuena and Francisco Melo, The Protein-DNA Interface database. BMC Bioinformatics 2010, 11, 262.").append('\n');
         stringBuilder.append("# Detailed effective interactions").append('\n');
         stringBuilder.append("# 1: DNA; 2: Protein").append('\n');
         // First atom

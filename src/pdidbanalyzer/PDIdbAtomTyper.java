@@ -24,6 +24,9 @@ public class PDIdbAtomTyper {
     /** The PDB polymer */
     private IPDBPolymer pdbPolymer;
 
+    /** The name of the PDB file */
+    private String filename;
+
     public PDIdbAtomTyper(IPDBPolymer pdbPolymer) {
         this.pdbPolymer = pdbPolymer;
     }
@@ -38,6 +41,15 @@ public class PDIdbAtomTyper {
 
     public IPDBPolymer getPdbPolymer() {
         return pdbPolymer;
+    }
+
+    public PDIdbAtomTyper setFilename(String filename) {
+        this.filename = filename;
+        return this;
+    }
+
+    public String getFilename() {
+        return filename;
     }
     
     private boolean isNucleic(IPDBAtom atom) {
@@ -479,7 +491,7 @@ public class PDIdbAtomTyper {
                                  ("CD1".equals(pdbAtom.getName()) && "TRP".equals(pdbAtom.getResName()))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbProteinAtomType.TRP_HIS_CH);
                         }
-                        // Type 25: Side chain histidine NH sp2 (donor) bound to HIS_CD2
+                        // Type 25: Side chain histidine NE2 (NH, sp2, donor) bound to HIS_CD2
                         else if (("NE2".equals(pdbAtom.getName()) && "HIS".equals(pdbAtom.getResName()))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbProteinAtomType.HIS_NE2);
                         }
@@ -539,7 +551,7 @@ public class PDIdbAtomTyper {
                         else if (("CD".equals(pdbAtom.getName()) && "ARG".equals(pdbAtom.getResName()))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbProteinAtomType.ARG_CD);
                         }
-                        // Type 38: Side chain histidine -N= sp2 (acceptor) bound to HIS_CG
+                        // Type 38: Side chain histidine ND1 (-N=, sp2, acceptor) bound to HIS_CG
                         else if (("ND1".equals(pdbAtom.getName()) && "HIS".equals(pdbAtom.getResName()))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbProteinAtomType.HIS_ND1);
                         }
@@ -560,8 +572,8 @@ public class PDIdbAtomTyper {
 
                     }
                     log.debug("{} {} {}", new Object[]{pdbAtom.getName(), pdbAtom.getResName(), pdbAtom.getProperty(IAtomType.class)});
-                    if (pdbAtom.getProperty(IAtomType.class) == null) {
-                        log.warn("ERROR: atom type = null. Atom: {} Number: {}", pdbAtom.getName(), pdbAtom.getSerial());
+                    if (pdbAtom.getProperty(IAtomType.class) == null && (isPeptidic(pdbAtom) || isNucleic(pdbAtom) || isWater(pdbAtom)) && !"H".equals(pdbAtom.getSymbol())) {
+                        log.warn("Atom type = null. PDB file: {} Chain: {} Res: {} {} Atom: {} {} HETATM: {}", new Object[] {filename, pdbAtom.getChainID(), pdbAtom.getResName(), pdbAtom.getResSeq(), pdbAtom.getName(), pdbAtom.getSerial(), pdbAtom.getHetAtom()});
                     }
                 }
                 if (isFirstResidue && !monomerId.equals("")) {

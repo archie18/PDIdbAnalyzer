@@ -20,6 +20,6 @@ public interface IInteractionTyper {
      * @param atom2 second atom
      * @return the interaction type
      */
-    PDIdbInteractionType getInteractionType(IAtom atom1, IAtom atom2);
+    IInteractionType getInteractionType(IAtom atom1, IAtom atom2);
 
 }

@@ -49,6 +49,7 @@ public class CommandLineParameters {
     options = new Options();
     // Add the individual options
     options.addOption( OptionBuilder.isRequired().hasArg().withArgName("pdbFile").withDescription("name of the input PDB file or directory name").withLongOpt("file").create('f') );
+    options.addOption( OptionBuilder.hasArg().withArgName("mode").withDescription("1: Original PDIdb mode (default), 2: Extended mode").withLongOpt("mode").create('m') );
     options.addOption( OptionBuilder.withDescription("displays this help text").withLongOpt("help").create('h') );
     options.addOption( OptionBuilder.withDescription("displays version information and exits").withLongOpt("version").create('v') );
   }
@@ -130,8 +131,19 @@ public class CommandLineParameters {
    * Returns the name of the input PDB file or directory name.
    * @return the name of the input PDB file or directory name
    */
-  String getPdbFileOption( ) {
+  String getPdbFileOption() {
     return commandLine.getOptionValue("f").trim();
+  }
+
+  /**
+   * Returns the operation mode 1: Original PDIdb mode (default), 2: Extended mode.
+   * @return the operation mode
+   */
+  String getModeOption() {
+      if (commandLine.getOptionValue("m") != null)
+          return commandLine.getOptionValue("m").trim();
+      else
+          return "1"; // default value
   }
   
 }

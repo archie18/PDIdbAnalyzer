@@ -320,6 +320,8 @@ public class PDBReader extends DefaultChemObjectReader {
 						
 						/** As HETATMs cannot be considered to either belong to a certain monomer or strand,
 						 * they are dealt with seperately.*/
+
+// BUG-FIX: HETATM entries should be added to the normal hierachy, i.e. to a Residue
 //					} else if("HETATM".equalsIgnoreCase(cCol))	{
 //						// read an atom record
 //						oAtom = readAtom(cRead, lineLength);
@@ -335,26 +337,29 @@ public class PDBReader extends DefaultChemObjectReader {
 						oStrand = new PDBStrand();
 						oStrand.setStrandName(String.valueOf(chain));
 						logger.debug("Added new STRAND");
-					} else if ("END   ".equalsIgnoreCase(cCol)) {
-						atomNumberMap.clear();
-						if (isProteinStructure) {
-							// create bonds and finish the molecule
-							if (useRebondTool.isSet()) {
-								try {
-									if(!createBondsWithRebondTool(oBP))	{
-										// Get rid of all potentially created bonds.
-										logger.info("Bonds could not be created using the RebondTool when PDB file was read.");								
-										oBP.removeAllBonds();								
-									}
-								} catch (Exception exception) {
-									logger.info("Bonds could not be created when PDB file was read.");
-									logger.debug(exception);
-								}
-							}
-							oSet.addMolecule(oBP);
-						} else {
-							oSet.addMolecule(molecularStructure);
-						}
+
+// BUG-FIX: Do this automatically after the last line was read. This also
+// works in case and "END" line was omitted.
+//					} else if ("END   ".equalsIgnoreCase(cCol)) {
+//						atomNumberMap.clear();
+//						if (isProteinStructure) {
+//							// create bonds and finish the molecule
+//							if (useRebondTool.isSet()) {
+//								try {
+//									if(!createBondsWithRebondTool(oBP))	{
+//										// Get rid of all potentially created bonds.
+//										logger.info("Bonds could not be created using the RebondTool when PDB file was read.");
+//										oBP.removeAllBonds();
+//									}
+//								} catch (Exception exception) {
+//									logger.info("Bonds could not be created when PDB file was read.");
+//									logger.debug(exception);
+//								}
+//							}
+//							oSet.addMolecule(oBP);
+//						} else {
+//							oSet.addMolecule(molecularStructure);
+//						}
 					} else if (cCol.equals("MODEL ")) {
 						// OK, start a new model and save the current one first *if* it contains atoms
 						if (isProteinStructure) {
@@ -495,6 +500,26 @@ public class PDBReader extends DefaultChemObjectReader {
 					} // ignore all other commands
 				}
 			} while (_oInput.ready() && (cRead != null));
+                        // BUG-FIX: Moved down from above. See "END" keyword.
+                        atomNumberMap.clear();
+                        if (isProteinStructure) {
+                                // create bonds and finish the molecule
+                                if (useRebondTool.isSet()) {
+                                        try {
+                                                if(!createBondsWithRebondTool(oBP))	{
+                                                        // Get rid of all potentially created bonds.
+                                                        logger.info("Bonds could not be created using the RebondTool when PDB file was read.");
+                                                        oBP.removeAllBonds();
+                                                }
+                                        } catch (Exception exception) {
+                                                logger.info("Bonds could not be created when PDB file was read.");
+                                                logger.debug(exception);
+                                        }
+                                }
+                                oSet.addMolecule(oBP);
+                        } else {
+                                oSet.addMolecule(molecularStructure);
+                        }
 		} catch (Exception e) {
 			logger.error("Found a problem at line:");
 			logger.error(cRead);
@@ -528,6 +553,10 @@ public class PDBReader extends DefaultChemObjectReader {
 		if (secondAtom == null) {
 			logger.error("Could not find bond target atom in map with serial id: ", bondAtomNo);
 		}
+                // BUG-FIX
+                if (firstAtom == null || secondAtom == null) {
+                    return;
+                }
 		IBond bond = firstAtom.getBuilder().newBond(
 		                firstAtom, secondAtom, IBond.Order.SINGLE);
 		for (int i = 0; i < bondsFromConnectRecords.size(); i++) {

@@ -49,6 +49,9 @@ public class InteractionAnalyzer {
     /** InteractionTyper */
     private IInteractionTyper interactionTyper;
 
+    /** Ignore unknown (null) atomtypes in effective interactions */
+    private boolean ignoreUnknownAtomTypes = true;
+
     
     /**
      * Creates a new instance which uses a default <code>PDIdbOutputFormatter</code>,
@@ -105,6 +108,26 @@ public class InteractionAnalyzer {
     }
 
     /**
+     * Ignores unknown (null) atom types in effective interaction calculations
+     * @param ignoreUnknownAtomTypes
+     */
+    public InteractionAnalyzer setIgnoreUnknownAtomTypes(boolean ignoreUnknownAtomTypes) {
+        this.ignoreUnknownAtomTypes = ignoreUnknownAtomTypes;
+        return this;
+    }
+
+    /**
+     * Returns true if unknown (null) atom types are ignored in effective
+     * interaction calculations
+     * @return
+     */
+    public boolean isIgnoreUnknownAtomTypes() {
+        return ignoreUnknownAtomTypes;
+    }
+
+
+
+    /**
      * Returns the PDB polymer
      * @return the PDB polymer
      */
@@ -140,11 +163,13 @@ public class InteractionAnalyzer {
     }
     
     /**
-     * Performs the interaction analysis. Only interactions between DNA and
-     * protein atoms are analysed. However, other atoms (e.g. HETATM, waters...)
-     * will be taken into account when determining effective interactions. If
-     * this is not desired these atoms should be removed prior to calling this
-     * method.
+     * Performs the interaction analysis. Only interactions between typed DNA
+     * and protein atoms are analysed. However, if
+     * <code>ignoreUnknownAtomTypes<code> is true other atoms (e.g. HETATM,
+     * waters...) will be taken into account when determining effective
+     * interactions. If this is not desired <code>ignoreUnknownAtomTypes<code>
+     * should be set true (default) or these atoms should be removed prior to
+     * calling this method.
      */
     public void run() {
         
@@ -187,7 +212,7 @@ public class InteractionAnalyzer {
                 // interaction is effective.
                 if (getDistance(i, j) <= distanceCutoff && isEffectiveInteraction(i, j)) {
                     log.debug("Found effective interaction within cutoff range");
-                    PDIdbInteractionType intType = interactionTyper.getInteractionType(pdbPolymer.getAtom(i), pdbPolymer.getAtom(j));
+                    IInteractionType intType = interactionTyper.getInteractionType(pdbPolymer.getAtom(i), pdbPolymer.getAtom(j));
                         log.debug("Interaction type: {}", intType);
                     if (intType != null) {
                         // Format output
@@ -276,6 +301,12 @@ public class InteractionAnalyzer {
 
         log.trace("start isEffectiveInteraction");
         for (int atom3Idx = 0; atom3Idx < pdbPolymer.getAtomCount(); atom3Idx++) {
+
+            // Skip atom if atom type is null and ignoreUnknownAtomTypes is true
+            if (ignoreUnknownAtomTypes == true && pdbPolymer.getAtom(atom3Idx).getProperty(IAtomType.class) == null) {
+                continue;
+            }
+
             if ((atom3Idx != atom1Idx) && (atom3Idx != atom2Idx)) {
                 // Get distance from the lower triangle of the distance matrix
                 double distance = getDistance(atom1Idx, atom3Idx);

@@ -48,7 +48,8 @@ public class PDIdbGrooveTyper {
                 "C3'".equals(pdbAtom.getName()) ||
                 "C4'".equals(pdbAtom.getName()) ||
                 "C5'".equals(pdbAtom.getName()) ||
-                "O3'".equals(pdbAtom.getName())) {
+                "O3'".equals(pdbAtom.getName()) ||
+                "O4'".equals(pdbAtom.getName())) {
                                 
                 pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.B);
             }
