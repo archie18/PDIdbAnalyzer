@@ -6,6 +6,7 @@
 package pdidbanalyzer;
 
 import org.openscience.cdk.interfaces.IAtom;
+import org.openscience.cdk.interfaces.IPDBAtom;
 
 /**
  *
@@ -25,6 +26,30 @@ public class AndyInteractionTyper extends PDIdbInteractionTyper {
             return false;
         PDIdbProteinAtomType type = (PDIdbProteinAtomType) atom.getProperty(IAtomType.class);
         if (PDIdbProteinAtomType.HIS_ND1.equals(type))
+            return true;
+
+        return false;
+    }
+    
+    /**
+     * Returns true if the atom is a protein side chain nitrogen donor
+     * @param atom an atom
+     * @return true if the atom is a protein side chain nitrogen donor
+     */
+    @Override
+    protected boolean isProteinSideChainNitrogenDonor(IAtom atom) {
+        if (atom.getProperty(IAtomType.class) == null)
+            return false;
+        if (!PDIdbProteinAtomType.class.equals(atom.getProperty(IAtomType.class).getClass()))
+            return false;
+        PDIdbProteinAtomType type = (PDIdbProteinAtomType) atom.getProperty(IAtomType.class);
+        if (PDIdbProteinAtomType.ASN_GLN_N.equals(type) ||
+                PDIdbProteinAtomType.TRP_N.equals(type) ||
+                (PDIdbProteinAtomType.LYS_N.equals(type) && !"N".equals(((IPDBAtom) atom).getName())) ||
+                PDIdbProteinAtomType.ARG_NH.equals(type) ||
+                PDIdbProteinAtomType.ARG_NE.equals(type) ||
+                PDIdbProteinAtomType.HIS_NE2.equals(type) ||
+                PDIdbProteinAtomType.HIS_ND1.equals(type))    // Added, because ND1 can be protonated
             return true;
 
         return false;
