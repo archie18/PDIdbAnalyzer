@@ -85,6 +85,9 @@ public class PDIdbAnalyzer {
                 continue;
             }
             
+            HBPlus hbp = new HBPlus();
+            hbp.run(pdbFile);
+            
             String filename = pdbFile.getName();
             log.debug("File: {}", pdbFile);
             
