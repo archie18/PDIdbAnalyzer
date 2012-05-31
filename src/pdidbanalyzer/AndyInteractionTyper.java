@@ -15,7 +15,7 @@ import org.openscience.cdk.interfaces.IPDBAtom;
 public class AndyInteractionTyper extends PDIdbInteractionTyper {
     
     /** An HBPlus object used for H-bond validation */
-    private HBPlus hbPlus;
+    private HBPlus hbPlus = null;
 
     /**
      * Return the HBPlus object used for H-bond validation
@@ -122,7 +122,7 @@ public class AndyInteractionTyper extends PDIdbInteractionTyper {
         // Canonical H-bond interactions
         
         // Perfrom HBPLUS pre-check: Only consider H-bonds detected by HBPLUS
-        if (hbPlus.isHBond((IPDBAtom)atom1,(IPDBAtom) atom2)) {
+        if (hbPlus == null || hbPlus.isHBond((IPDBAtom) atom1,(IPDBAtom) atom2)) {
 
             // Type 1: DBE-PSC: NA-ND
             if (isDnaBaseEdgeNitrogenAcceptor(atom1) && isProteinSideChainNitrogenDonor(atom2)) {

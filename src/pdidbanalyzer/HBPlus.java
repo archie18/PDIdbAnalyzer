@@ -44,7 +44,7 @@ public class HBPlus {
         //args[1]="-P";
         args[1] = pdbFile.getAbsolutePath();
         
-        log.info("HBPLUS command line: {}", Arrays.toString(args));
+        log.debug("HBPLUS command line: {}", Arrays.toString(args));
 
         try {
 
@@ -185,6 +185,18 @@ public class HBPlus {
         sb.append(atom2.getChainID());
         sb.append(atom2.getResSeq());
         sb.append(atom2.getICode());
-        return hb2Contents.containsKey(sb.toString());
+        String key1 = sb.toString();
+        sb = new StringBuilder();
+        sb.append(atom2.getName());
+        sb.append(atom2.getChainID());
+        sb.append(atom2.getResSeq());
+        sb.append(atom2.getICode());
+        sb.append(atom1.getName());
+        sb.append(atom1.getChainID());
+        sb.append(atom1.getResSeq());
+        sb.append(atom1.getICode());
+        String key2 = sb.toString();
+        
+        return hb2Contents.containsKey(key1) || hb2Contents.containsKey(key2);
     }
 }

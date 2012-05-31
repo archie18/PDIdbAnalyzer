@@ -113,12 +113,15 @@ public class PDIdbAnalyzer {
                 System.exit(1);
             }
             
-            HBPlus hbPlus = new HBPlus();
-            try {
-                hbPlus.run(pdbFile);
-            } catch (IOException ex) {
-                log.error(ex.toString(), ex);
-                System.exit(1);
+            HBPlus hbPlus = null;
+            if ("3".equals(mode)) {
+                hbPlus = new HBPlus();
+                try {
+                    hbPlus.run(pdbFile);
+                } catch (IOException ex) {
+                    log.error(ex.toString(), ex);
+                    System.exit(1);
+                }
             }
 
             if (pdbPolymer == null) {
@@ -153,7 +156,7 @@ public class PDIdbAnalyzer {
 
                 // Create an IOutputFormatter
                 IOutputFormatter outputFormatter;
-                if ("2".equals(mode))
+                if ("2".equals(mode) || "3".equals(mode))
                     outputFormatter = new AndyOutputFormatter();
                 else
                     outputFormatter = new PDIdbOutputFormatter();
@@ -161,6 +164,8 @@ public class PDIdbAnalyzer {
                 // Create an IInteractionTyper
                 IInteractionTyper interactionTyper;
                 if ("2".equals(mode))
+                    interactionTyper = new AndyInteractionTyper();
+                else if ("3".equals(mode))
                     interactionTyper = new AndyInteractionTyper().setHBPlus(hbPlus);
                 else
                     interactionTyper = new PDIdbInteractionTyper();
@@ -170,7 +175,7 @@ public class PDIdbAnalyzer {
                 out.println(outputFormatter.getHeader());
 
                 // Run the interaction analysis
-                InteractionAnalyzer intAnalyzer = new InteractionAnalyzer().setPdbPolymer(pdbPolymer).setOut(out).setOutputFormatter(outputFormatter).setIgnoreUnknownAtomTypes(ignoreUnknownAtomTypes);
+                InteractionAnalyzer intAnalyzer = new InteractionAnalyzer().setInteractionTyper(interactionTyper).setPdbPolymer(pdbPolymer).setOut(out).setOutputFormatter(outputFormatter).setIgnoreUnknownAtomTypes(ignoreUnknownAtomTypes);
                 intAnalyzer.run();
 
                 // Close the output stream
