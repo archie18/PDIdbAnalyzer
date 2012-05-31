@@ -140,11 +140,12 @@ public class HBPlus {
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
-            StringBuilder sb = new StringBuilder();
+            
             while ((line = br.readLine()) != null) {
                 if(Character.isDigit(line.charAt(1))&&Character.isDigit(line.charAt(2)))
                 {
                     // Generate unique key for each H-bond
+                    StringBuilder sb = new StringBuilder();
                     HBPlusRecord record = parseLine(line);
                     sb.append(record.getAcceptorName());
                     sb.append(record.getAcceptorChainID());
