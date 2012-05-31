@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import org.openscience.cdk.interfaces.IAtom;
 
 /**
  *
@@ -65,5 +66,17 @@ public class HBPlus {
         }
 
 
+    }
+    
+    /**
+     * Returns true if HBPLUS detected an H-bond involving atom1 and atom2,
+     * otherwise returns false.
+     * @param atom1 first atom
+     * @param atom2 second atom
+     * @return true if HBPLUS detected an H-bond involving the two atoms,
+     *         otherwise false
+     */
+    public boolean isHBond(IAtom atom1, IAtom atom2) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
