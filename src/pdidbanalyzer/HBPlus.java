@@ -4,15 +4,14 @@
  */
 package pdidbanalyzer;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-import com.sun.xml.internal.stream.buffer.stax.StreamReaderBufferCreator;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.openscience.cdk.interfaces.IAtom;
+import java.util.Map;
+import org.openscience.cdk.interfaces.IPDBAtom;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -20,22 +19,32 @@ import org.openscience.cdk.interfaces.IAtom;
  */
 public class HBPlus {
 
+    /** slf4j logging */
+    private static final Logger log = LoggerFactory.getLogger(HBPlus.class);
+
     private String programOut = "";
     private String programError = "";
+    private File pdbFile;
     
     public static int count = 1;
+    
+    /** Parsed .hb2-file contents */
+    private Map<String, HBPlusRecord> hb2Contents;
 
     /**
      * Runs the external program HBPlus
      *
-     * @param file a PDB file
+     * @param pdbFile a PDB file
      */
-    public void run(File file) {
+    public void run(File pdbFile) throws IOException {
+        this.pdbFile = pdbFile;
 
         String[] args = new String[2];
         args[0] = "./hbplus";
         //args[1]="-P";
-        args[1] = file.getAbsolutePath();
+        args[1] = pdbFile.getAbsolutePath();
+        
+        log.info("HBPLUS command line: {}", Arrays.toString(args));
 
         try {
 
@@ -70,29 +79,32 @@ public class HBPlus {
             fw.write("---------------------------------------------------------\n");
             fw.close();
             //</editor-fold>
+        
+            // Parse .hb2 file
+            parse();
 
         } catch (InterruptedException ex) {
-            //log.error(ex.toString(), ex);
-        } catch (IOException ex) {
-            System.out.print(ex.toString() + "\n");            
+            log.error(ex.toString(), ex);
         }
-
-    }
+   }
     
     private HBPlusRecord parseLine(String line) {
         // Parse line
         HBPlusRecord hbprecord = new HBPlusRecord();
-        hbprecord.setDonorResname(line.substring(6,9).trim());
-        hbprecord.setDonorResId(line.substring(1, 5).replaceFirst("^0+(?!$)", ""));
-        hbprecord.setDonorChainId(line.substring(0,1));
-        hbprecord.setDonorAtomname(line.substring(9,13).trim());
-        hbprecord.setDonorElement(hbprecord.getDonorAtomname().substring(0, 1));
+        hbprecord.setDonorResName(line.substring(6,9).trim());
+        hbprecord.setDonorResSeq(line.substring(1, 5).replaceFirst("^0+(?!$)", ""));
+        hbprecord.setDonorChainID(line.substring(0,1));
+        hbprecord.setDonorName(line.substring(9,13).trim());
+        hbprecord.setDonorElement(hbprecord.getDonorName().substring(0, 1));
+        hbprecord.setDonorICode(line.substring(5,6).replace("-", ""));
         
-        hbprecord.setAcceptorResname(line.substring(20,23).trim());
-        hbprecord.setAcceptorResId(line.substring(15, 19).replaceFirst("^0+(?!$)", ""));
-        hbprecord.setAcceptorChainId(line.substring(14,15));
-        hbprecord.setAcceptorAtomname(line.substring(23,27).trim());
-        hbprecord.setAcceptorElement(hbprecord.getAcceptorAtomname().substring(0, 1));
+        hbprecord.setAcceptorResName(line.substring(20,23).trim());
+        hbprecord.setAcceptorResSeq(line.substring(15, 19).replaceFirst("^0+(?!$)", ""));
+        hbprecord.setAcceptorChainID(line.substring(14,15));
+        hbprecord.setAcceptorName(line.substring(23,27).trim());
+        hbprecord.setAcceptorElement(hbprecord.getAcceptorName().substring(0, 1));
+        hbprecord.setAcceptorICode(line.substring(19,20).replace("-", ""));
+        
         
         
         try
@@ -114,11 +126,13 @@ public class HBPlus {
         return hbprecord;
     }
     
-    public List<HBPlusRecord> parse(String filename) {
-        
-        
-        List<HBPlusRecord> hb2Contents = new ArrayList<HBPlusRecord>();
-        String newfilename = filename.substring(0,filename.lastIndexOf("."))+".hb2";        
+    /**
+     * Parses HBPLUS' output file .hb2 into an internal structure
+     */
+    private void parse() {
+                
+        hb2Contents = new HashMap<String, HBPlusRecord>();
+        String newfilename = pdbFile.getName().substring(0, pdbFile.getName().lastIndexOf("."))+".hb2";        
         
         try {            
             
@@ -126,10 +140,23 @@ public class HBPlus {
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
+            StringBuilder sb = new StringBuilder();
             while ((line = br.readLine()) != null) {
                 if(Character.isDigit(line.charAt(1))&&Character.isDigit(line.charAt(2)))
                 {
-                    hb2Contents.add(parseLine(line));
+                    // Generate unique key for each H-bond
+                    HBPlusRecord record = parseLine(line);
+                    sb.append(record.getAcceptorName());
+                    sb.append(record.getAcceptorChainID());
+                    sb.append(record.getAcceptorResSeq());
+                    sb.append(record.getAcceptorICode());
+                    sb.append(record.getDonorName());
+                    sb.append(record.getDonorChainID());
+                    sb.append(record.getDonorResSeq());
+                    sb.append(record.getDonorICode());
+                    
+                    // Add HBPlusRecord with unique key to map
+                    hb2Contents.put(sb.toString(), record);
                 }
             }
             in.close();
@@ -137,7 +164,6 @@ public class HBPlus {
         } catch (IOException ex) {
             System.out.println(ex.toString());
         }
-        return hb2Contents;
     }
     
     /**
@@ -148,7 +174,17 @@ public class HBPlus {
      * @return true if HBPLUS detected an H-bond involving the two atoms,
      *         otherwise false
      */
-    public boolean isHBond(IAtom atom1, IAtom atom2) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public boolean isHBond(IPDBAtom atom1, IPDBAtom atom2) {
+        // Generate key from atoms
+        StringBuilder sb = new StringBuilder();
+        sb.append(atom1.getName());
+        sb.append(atom1.getChainID());
+        sb.append(atom1.getResSeq());
+        sb.append(atom1.getICode());
+        sb.append(atom2.getName());
+        sb.append(atom2.getChainID());
+        sb.append(atom2.getResSeq());
+        sb.append(atom2.getICode());
+        return hb2Contents.containsKey(sb.toString());
     }
 }

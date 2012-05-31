@@ -21,7 +21,7 @@ public class AndyInteractionTyper extends PDIdbInteractionTyper {
      * Return the HBPlus object used for H-bond validation
      * @return
      */
-    public HBPlus getHbPlus() {
+    public HBPlus getHBPlus() {
         return hbPlus;
     }
 
@@ -30,7 +30,7 @@ public class AndyInteractionTyper extends PDIdbInteractionTyper {
      * @param hbPlus
      * @return this object
      */
-    public AndyInteractionTyper setHbPlus(HBPlus hbPlus) {
+    public AndyInteractionTyper setHBPlus(HBPlus hbPlus) {
         this.hbPlus = hbPlus;
         return this;
     }
@@ -122,7 +122,7 @@ public class AndyInteractionTyper extends PDIdbInteractionTyper {
         // Canonical H-bond interactions
         
         // Perfrom HBPLUS pre-check: Only consider H-bonds detected by HBPLUS
-        if (hbPlus.isHBond(atom1, atom2)) {
+        if (hbPlus.isHBond((IPDBAtom)atom1,(IPDBAtom) atom2)) {
 
             // Type 1: DBE-PSC: NA-ND
             if (isDnaBaseEdgeNitrogenAcceptor(atom1) && isProteinSideChainNitrogenDonor(atom2)) {

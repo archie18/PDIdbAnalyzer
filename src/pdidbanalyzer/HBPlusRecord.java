@@ -15,17 +15,19 @@ import org.openscience.cdk.interfaces.IPDBAtom;
  * @author pipe
  */
 public class HBPlusRecord { 
-    private String donorResname;
-    private String donorResId;
-    private String donorChainId;
-    private String donorAtomname;
+    private String donorResName;
+    private String donorResSeq;
+    private String donorChainID;
+    private String donorName;
     private String donorElement;
+    private String donorICode;
     
-    private String acceptorResname;
-    private String acceptorResId;
-    private String acceptorChainId;
-    private String acceptorAtomname;
+    private String acceptorResName;
+    private String acceptorResSeq;
+    private String acceptorChainID;
+    private String acceptorName;
     private String acceptorElement;  
+    private String acceptorICode;
     
     private Float DistDA;
     private Float DistHA;
@@ -77,20 +79,12 @@ public class HBPlusRecord {
         this.DistHA = DistHA;
     }
 
-    public String getAcceptorChainId() {
-        return acceptorChainId;
+    public String getAcceptorChainID() {
+        return acceptorChainID;
     }
 
-    public void setAcceptorChainId(String acceptoChainId) {
-        this.acceptorChainId = acceptoChainId;
-    }
-
-    public String getAcceptorAtomname() {
-        return acceptorAtomname;
-    }
-
-    public void setAcceptorAtomname(String acceptorAtomname) {
-        this.acceptorAtomname = acceptorAtomname;
+    public void setAcceptorChainID(String acceptorChainID) {
+        this.acceptorChainID = acceptorChainID;
     }
 
     public String getAcceptorElement() {
@@ -101,36 +95,36 @@ public class HBPlusRecord {
         this.acceptorElement = acceptorElement;
     }
 
-    public String getAcceptorResId() {
-        return acceptorResId;
+    public String getAcceptorName() {
+        return acceptorName;
     }
 
-    public void setAcceptorResId(String acceptorResId) {
-        this.acceptorResId = acceptorResId;
+    public void setAcceptorName(String acceptorName) {
+        this.acceptorName = acceptorName;
     }
 
-    public String getAcceptorResname() {
-        return acceptorResname;
+    public String getAcceptorResName() {
+        return acceptorResName;
     }
 
-    public void setAcceptorResname(String acceptorResname) {
-        this.acceptorResname = acceptorResname;
+    public void setAcceptorResName(String acceptorResName) {
+        this.acceptorResName = acceptorResName;
     }
 
-    public String getDonorAtomname() {
-        return donorAtomname;
+    public String getAcceptorResSeq() {
+        return acceptorResSeq;
     }
 
-    public void setDonorAtomname(String donorAtomname) {
-        this.donorAtomname = donorAtomname;
+    public void setAcceptorResSeq(String acceptorResSeq) {
+        this.acceptorResSeq = acceptorResSeq;
     }
 
-    public String getDonorChainId() {
-        return donorChainId;
+    public String getDonorChainID() {
+        return donorChainID;
     }
 
-    public void setDonorChainId(String donorChainId) {
-        this.donorChainId = donorChainId;
+    public void setDonorChainID(String donorChainID) {
+        this.donorChainID = donorChainID;
     }
 
     public String getDonorElement() {
@@ -141,21 +135,47 @@ public class HBPlusRecord {
         this.donorElement = donorElement;
     }
 
-    public String getDonorResId() {
-        return donorResId;
+    public String getDonorName() {
+        return donorName;
     }
 
-    public void setDonorResId(String donorResId) {
-        this.donorResId = donorResId;
+    public void setDonorName(String donorName) {
+        this.donorName = donorName;
     }
 
-    public String getDonorResname() {
-        return donorResname;
+    public String getDonorResName() {
+        return donorResName;
     }
 
-    public void setDonorResname(String donorResname) {
-        this.donorResname = donorResname;
+    public void setDonorResName(String donorResName) {
+        this.donorResName = donorResName;
     }
+
+    public String getDonorResSeq() {
+        return donorResSeq;
+    }
+
+    public void setDonorResSeq(String donorResSeq) {
+        this.donorResSeq = donorResSeq;
+    }
+
+    public String getAcceptorICode() {
+        return acceptorICode;
+    }
+
+    public void setAcceptorICode(String acceptorICode) {
+        this.acceptorICode = acceptorICode;
+    }
+
+    public String getDonorICode() {
+        return donorICode;
+    }
+
+    public void setDonorICode(String donorICode) {
+        this.donorICode = donorICode;
+    }
+
+   
     
 
     
@@ -170,10 +190,10 @@ public class HBPlusRecord {
         IChemObjectBuilder builder = DefaultChemObjectBuilder.getInstance();
         
         IPDBAtom pdbatom = builder.newPDBAtom(acceptorElement);        
-        pdbatom.setChainID(acceptorChainId);
-        pdbatom.setName(acceptorAtomname);
-        pdbatom.setResName(acceptorResname);
-        pdbatom.setResSeq(acceptorResId);
+        pdbatom.setChainID(acceptorChainID);
+        pdbatom.setName(acceptorName);
+        pdbatom.setResName(acceptorResName);
+        pdbatom.setResSeq(acceptorResSeq);
         
         IAtom iatom = builder.newAtom(acceptorElement);
         
@@ -185,10 +205,10 @@ public class HBPlusRecord {
         
         IChemObjectBuilder builder = DefaultChemObjectBuilder.getInstance();
         IPDBAtom pdbatom = builder.newPDBAtom(donorElement);
-        pdbatom.setChainID(donorChainId);
-        pdbatom.setName(donorAtomname);
-        pdbatom.setResName(donorResname);
-        pdbatom.setResSeq(donorResId);
+        pdbatom.setChainID(donorChainID);
+        pdbatom.setName(donorName);
+        pdbatom.setResName(donorResName);
+        pdbatom.setResSeq(donorResSeq);
         return pdbatom;
     }
     

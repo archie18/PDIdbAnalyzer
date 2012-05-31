@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.FilenameUtils;
 import org.openscience.cdk.DefaultChemObjectBuilder;
@@ -84,10 +86,7 @@ public class PDIdbAnalyzer {
             if (!pdbFile.isFile()) {
                 continue;
             }
-            
-            HBPlus hbp = new HBPlus();
-            hbp.run(pdbFile);
-            
+                      
             String filename = pdbFile.getName();
             log.debug("File: {}", pdbFile);
             
@@ -105,10 +104,21 @@ public class PDIdbAnalyzer {
                 pdbPolymer = (IPDBPolymer) chemFile.getChemSequence(0).getChemModel(0).getMoleculeSet().getMolecule(0);
             } catch (CDKException ex) {
                 log.error(ex.toString(), ex);
+                System.exit(1);
             } catch (FileNotFoundException ex) {
                 log.error(ex.toString(), ex);
+                System.exit(1);
             } catch (IOException ex) {
                 log.error(ex.toString(), ex);
+                System.exit(1);
+            }
+            
+            HBPlus hbPlus = new HBPlus();
+            try {
+                hbPlus.run(pdbFile);
+            } catch (IOException ex) {
+                log.error(ex.toString(), ex);
+                System.exit(1);
             }
 
             if (pdbPolymer == null) {
@@ -151,7 +161,7 @@ public class PDIdbAnalyzer {
                 // Create an IInteractionTyper
                 IInteractionTyper interactionTyper;
                 if ("2".equals(mode))
-                    interactionTyper = new AndyInteractionTyper();
+                    interactionTyper = new AndyInteractionTyper().setHBPlus(hbPlus);
                 else
                     interactionTyper = new PDIdbInteractionTyper();
 
