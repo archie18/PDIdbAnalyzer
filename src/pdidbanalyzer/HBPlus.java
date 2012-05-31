@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openscience.cdk.interfaces.IAtom;
 
 /**
  *
@@ -137,5 +138,17 @@ public class HBPlus {
             System.out.println(ex.toString());
         }
         return hb2Contents;
+    }
+    
+    /**
+     * Returns true if HBPLUS detected an H-bond involving atom1 and atom2,
+     * otherwise returns false.
+     * @param atom1 first atom
+     * @param atom2 second atom
+     * @return true if HBPLUS detected an H-bond involving the two atoms,
+     *         otherwise false
+     */
+    public boolean isHBond(IAtom atom1, IAtom atom2) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
