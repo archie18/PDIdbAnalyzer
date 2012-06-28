@@ -7,7 +7,6 @@ package pdidbanalyzer;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.openscience.cdk.interfaces.IPDBAtom;
 import org.slf4j.Logger;
@@ -30,7 +29,39 @@ public class HBPlus {
     
     /** Parsed .hb2-file contents */
     private Map<String, HBPlusRecord> hb2Contents;
+    
+    /**
+     * Solution taken from JavaWorld
+     * http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html
+     */
+    private class StreamGobbler extends Thread
+    {
+        InputStream is;
+        String type;
 
+        StreamGobbler(InputStream is, String type)
+        {
+            this.is = is;
+            this.type = type;
+        }
+
+        public void run()
+        {
+            try
+            {
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                String line=null;
+                while ( (line = br.readLine()) != null)
+                    log.debug("{}> {}", type, line); 
+                br.close();
+                } catch (IOException ioe)
+                {
+                    ioe.printStackTrace();  
+                }
+        }
+    }
+    
     /**
      * Runs the external program HBPlus
      *
@@ -41,8 +72,7 @@ public class HBPlus {
 
         String[] args = new String[2];
         args[0] = "./hbplus";
-        //args[1]="-P";
-        args[1] = pdbFile.getAbsolutePath();
+        args[1] = pdbFile.getPath();
         
         log.debug("HBPLUS command line: {}", Arrays.toString(args));
 
@@ -51,34 +81,48 @@ public class HBPlus {
             
             ProcessBuilder pb = new ProcessBuilder(args);
             Process p = pb.start();
-            p.waitFor();
+
+            // any error message?
+            StreamGobbler errorGobbler = new 
+                StreamGobbler(p.getErrorStream(), "ERROR");            
             
-            BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader stderr = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            String line;
+            // any output?
+            StreamGobbler outputGobbler = new 
+                StreamGobbler(p.getInputStream(), "OUTPUT");
+                
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();            
+
+            int exitVal = p.waitFor();
             
-            while ((line = stdout.readLine()) != null) {
-                programOut+=line+"\n";                
-            }
             
-            while ((line = stderr.readLine()) != null) {
-                programError+=line+"\n";                
-            }
+            //BufferedReader stdout = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            //BufferedReader stderr = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            //String line;
+            //
+            //while ((line = stdout.readLine()) != null) {
+            //    programOut+=line+"\n";                
+            //}
+            //
+            //while ((line = stderr.readLine()) != null) {
+            //    programError+=line+"\n";                
+            //}
             
-            //<editor-fold defaultstate="collapsed" desc="Saving Output and Error in file -> Out_HBPlus.out">
-            FileWriter fw = new FileWriter("Out_HBPlus.out", true); 
-            fw.write("-----------------"+"HBPLus Output nº"+count+"-----------------"+"\n");
-            count ++;
-            fw.write("Exit code: " + p.exitValue()+"\n");
-            fw.write("Output of running "+Arrays.toString(args)+" is:"+"\n");
-            fw.write(line+"\n");
-            fw.write(""+"\n");
-            fw.write("Stderr of running "+ Arrays.toString(args)+" is:"+"\n");
-            fw.write(line+"\n");
-            fw.write("\n");
-            fw.write("---------------------------------------------------------\n");
-            fw.close();
-            //</editor-fold>
+//            //<editor-fold defaultstate="collapsed" desc="Saving Output and Error in file -> Out_HBPlus.out">
+//            FileWriter fw = new FileWriter("Out_HBPlus.out", true); 
+//            fw.write("-----------------"+"HBPLus Output nº"+count+"-----------------"+"\n");
+//            count ++;
+//            fw.write("Exit code: " + p.exitValue()+"\n");
+//            fw.write("Output of running "+Arrays.toString(args)+" is:"+"\n");
+//            fw.write(line+"\n");
+//            fw.write(""+"\n");
+//            fw.write("Stderr of running "+ Arrays.toString(args)+" is:"+"\n");
+//            fw.write(line+"\n");
+//            fw.write("\n");
+//            fw.write("---------------------------------------------------------\n");
+//            fw.close();
+//            //</editor-fold>
         
             // Parse .hb2 file
             parse();

@@ -251,8 +251,10 @@ public class PDIdbAtomTyper {
                         else if (("C5".equals(pdbAtom.getName()) && ("DT".equals(pdbAtom.getResName()) || "T".equals(pdbAtom.getResName())))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbDNAAtomType.TC5);
                         }
-                        // Type 26: thymine C7 (methyl group)
-                        else if (("C7".equals(pdbAtom.getName()) && ("DT".equals(pdbAtom.getResName()) || "T".equals(pdbAtom.getResName())))) {
+                        // Type 26: thymine C7 (methyl group), also named C5M
+                        // according to older PDB file formats
+                        else if (("C7".equals(pdbAtom.getName()) && ("DT".equals(pdbAtom.getResName()) || "T".equals(pdbAtom.getResName()))) ||
+                                 ("C5M".equals(pdbAtom.getName()) && ("DT".equals(pdbAtom.getResName()) || "T".equals(pdbAtom.getResName())))) {
                             pdbAtom.setProperty(IAtomType.class, PDIdbDNAAtomType.TC7);
                         }
                         

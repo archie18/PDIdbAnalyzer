@@ -95,7 +95,9 @@ public class PDIdbGrooveTyper {
                      ("C6".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
                      ("C6".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName())) ||
                      ("C7".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
-                     ("C7".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName()))) {
+                     ("C7".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName())) ||
+                     ("C5M".equals(pdbAtom.getName()) && "DT".equals(pdbAtom.getResName())) ||
+                     ("C5M".equals(pdbAtom.getName()) && "T".equals(pdbAtom.getResName()))) {
 
                 pdbAtom.setProperty(PDIdbGrooveType.class, PDIdbGrooveType.W);
             }

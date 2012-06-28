@@ -80,6 +80,7 @@ public class PDIdbAnalyzer {
         
         // Process all PDB files (supports gzipped files)
         for (int i = 0; i < pdbFiles.length; i++) {
+            System.out.print(i+1);
             File pdbFile = pdbFiles[i];
 
             // Ensure the file is a regular file (e.g. not a directory)
@@ -149,7 +150,7 @@ public class PDIdbAnalyzer {
                 // Create the output PrintStream to a file with name: <pdbFile_basename>.dat
                 PrintStream out = null;
                 try {
-                    out = new PrintStream(FilenameUtils.getBaseName(filename) + ".dat");
+                    out = new PrintStream("results/"+ FilenameUtils.getBaseName(filename) + ".dat");
                 } catch (FileNotFoundException ex) {
                     log.error(ex.toString(), ex);
                 }
