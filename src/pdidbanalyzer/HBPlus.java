@@ -34,31 +34,28 @@ public class HBPlus {
      * Solution taken from JavaWorld
      * http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html
      */
-    private class StreamGobbler extends Thread
-    {
+    private class StreamGobbler extends Thread {
+
         InputStream is;
         String type;
 
-        StreamGobbler(InputStream is, String type)
-        {
+        StreamGobbler(InputStream is, String type) {
             this.is = is;
             this.type = type;
         }
 
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
                 InputStreamReader isr = new InputStreamReader(is);
                 BufferedReader br = new BufferedReader(isr);
-                String line=null;
-                while ( (line = br.readLine()) != null)
-                    log.debug("{}> {}", type, line); 
-                br.close();
-                } catch (IOException ioe)
-                {
-                    ioe.printStackTrace();  
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    log.debug("{}> {}", type, line);
                 }
+                br.close();
+            } catch (IOException ex) {
+                log.error(ex.toString(), ex);
+            }
         }
     }
     
@@ -71,7 +68,7 @@ public class HBPlus {
         this.pdbFile = pdbFile;
 
         String[] args = new String[2];
-        args[0] = "./hbplus";
+        args[0] = "hbplus";
         args[1] = pdbFile.getPath();
         
         log.debug("HBPLUS command line: {}", Arrays.toString(args));
@@ -149,12 +146,8 @@ public class HBPlus {
         hbprecord.setAcceptorElement(hbprecord.getAcceptorName().substring(0, 1));
         hbprecord.setAcceptorICode(line.substring(19,20).replace("-", ""));
         
-        
-        
         try
         {
-            
-        
             hbprecord.setDistDA(Float.parseFloat(line.substring(27, 32))) ;
             hbprecord.setDistHA(Float.parseFloat(line.substring(52, 57)));
             
@@ -162,9 +155,9 @@ public class HBPlus {
             hbprecord.setAngle_H_A_AA(Float.parseFloat(line.substring(58, 63)));
             hbprecord.setAngle_D_A_AA(Float.parseFloat(line.substring(64, 69)));
         }
-        catch (NumberFormatException e)
+        catch (NumberFormatException ex)
         {
-            System.out.println(e.getMessage());
+            log.error(ex.toString(), ex);
         }
         // Fill HBPlusRecord object
         return hbprecord;
@@ -207,7 +200,7 @@ public class HBPlus {
             in.close();
             
         } catch (IOException ex) {
-            System.out.println(ex.toString());
+            log.error(ex.toString(), ex);
         }
     }
     
