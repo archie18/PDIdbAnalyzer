@@ -1,0 +1,7 @@
+# PDIdb analysis by PDIdbAnalyzer.jar v0.2.1 (extended mode)
+# by Andreas Schueller <aschueller@bio.puc.cl>. Based on the works of Tomas Norambuena and Francisco Melo, The Protein-DNA Interface database. BMC Bioinformatics 2010, 11, 262.
+# Detailed effective interactions
+# 1: DNA; 2: Protein
+# ResName_1	ResIndex_1	ChainID_1	AtmName_1	Element	AtmIndex	Coord_x	Coord_y	Coord_z	ResName_2	ResIndex_2	ChainID_2	AtmName_2	Element	AtmIndex	Coord_x	Coord_y	Coord_z	Distance	Interaction_Type	Interaction_Class	Groove
+DC	426	C	O2	O	26	3.267	26.713	60.698	GLY	2	B	N	N	7	-0.685	30.508	63.467	6.139	20	6	S
+DC	426	C	N4	N	29	3.67	22.119	60.482	GLY	1	A	O	O	4	1.933	19.565	59.966	3.132	7	1	W
