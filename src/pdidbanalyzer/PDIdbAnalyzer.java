@@ -27,6 +27,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
+ *     2012-06-28    0.3      Added mode -m 3 HBPLUS functionality for distance
+ *                            and angle dependent hydrogen bond detection
+ *                            Co-author: Felipe Erices
  *     2011-09-06    0.2.1    Added parameter ignoreUnknownAtomTypes to
  *                            InteractionAnalyzer to ignore unknown atoms
  *                            in effective interactions
@@ -42,7 +45,7 @@ public class PDIdbAnalyzer {
     private static final Logger log = LoggerFactory.getLogger(PDIdbAnalyzer.class);
     
     /** The version string of this project */
-    public final static String version = "0.2.1";
+    public final static String version = "0.3";
 
 
     /**
@@ -80,7 +83,6 @@ public class PDIdbAnalyzer {
         
         // Process all PDB files (supports gzipped files)
         for (int i = 0; i < pdbFiles.length; i++) {
-            System.out.print(i+1);
             File pdbFile = pdbFiles[i];
 
             // Ensure the file is a regular file (e.g. not a directory)
@@ -89,7 +91,7 @@ public class PDIdbAnalyzer {
             }
                       
             String filename = pdbFile.getName();
-            log.debug("File: {}", pdbFile);
+            log.info("File: {}", pdbFile);
             
             IPDBPolymer pdbPolymer = null;
             try {
@@ -150,7 +152,7 @@ public class PDIdbAnalyzer {
                 // Create the output PrintStream to a file with name: <pdbFile_basename>.dat
                 PrintStream out = null;
                 try {
-                    out = new PrintStream("results/"+ FilenameUtils.getBaseName(filename) + ".dat");
+                    out = new PrintStream(FilenameUtils.getBaseName(filename) + ".dat");
                 } catch (FileNotFoundException ex) {
                     log.error(ex.toString(), ex);
                 }
