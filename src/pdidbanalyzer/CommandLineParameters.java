@@ -49,7 +49,7 @@ public class CommandLineParameters {
     options = new Options();
     // Add the individual options
     options.addOption( OptionBuilder.isRequired().hasArg().withArgName("pdbFile").withDescription("name of the input PDB file or directory name").withLongOpt("file").create('f') );
-    options.addOption( OptionBuilder.hasArg().withArgName("mode").withDescription("1: Original PDIdb mode (default), 2: Extended mode, 3: Extended mode with HBPLUS").withLongOpt("mode").create('m') );
+    options.addOption( OptionBuilder.hasArg().withArgName("mode").withDescription("1: Original PDIdb mode (default), 2: Extended mode, 3: Extended mode with HBPLUS, 4: Extended mode with PantanoOutputFilter").withLongOpt("mode").create('m') );
     options.addOption( OptionBuilder.withDescription("disable effective interactions").withLongOpt("noeff").create('n') );
     options.addOption( OptionBuilder.hasArg().withArgName("cutoff").withDescription("distance cutoff in angstrom (default: 7.0)").withLongOpt("distance").create('d') );
     options.addOption( OptionBuilder.withDescription("displays this help text").withLongOpt("help").create('h') );

@@ -54,6 +54,9 @@ public class InteractionAnalyzer {
 
     /** Ignore unknown (null) atomtypes in effectiveOnly interactions */
     private boolean ignoreUnknownAtomTypes = true;
+    
+    /** OutputFilter */
+    private PantanoOutputFilter outputFilter = null;
 
     
     /**
@@ -136,6 +139,11 @@ public class InteractionAnalyzer {
      */
     public boolean isIgnoreUnknownAtomTypes() {
         return ignoreUnknownAtomTypes;
+    }
+
+    public InteractionAnalyzer setOutputFilter(PantanoOutputFilter outputFilter) {
+        this.outputFilter = outputFilter;
+        return this;
     }
 
 
@@ -223,8 +231,10 @@ public class InteractionAnalyzer {
                 
                 // Ensure that distance <= distanceCutoff and that the
                 // interaction is effectiveOnly.
-                if (getDistance(i, j) <= distanceCutoff && (!effectiveOnly || isEffectiveInteraction(i, j))) {
-                    log.debug("Found effective interaction within cutoff range");
+                if (getDistance(i, j) <= distanceCutoff &&
+                        (!effectiveOnly || isEffectiveInteraction(i, j)) &&
+                        (outputFilter == null || (outputFilter != null && outputFilter.accept((IPDBAtom) pdbPolymer.getAtom(i)) && outputFilter.accept((IPDBAtom) pdbPolymer.getAtom(j)))) ) {
+                    log.debug("Found valid interaction within cutoff range");
                     IInteractionType intType = interactionTyper.getInteractionType(pdbPolymer.getAtom(i), pdbPolymer.getAtom(j));
                         log.debug("Interaction type: {}", intType);
                     if (intType != null) {

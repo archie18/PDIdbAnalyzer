@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
- *     2012-11-13    0.4      
+ *     2012-11-14    0.4      
  *     2012-06-28    0.3      Added mode -m 3 HBPLUS functionality for distance
  *                            and angle dependent hydrogen bond detection
  *                            Co-author: Felipe Erices
@@ -159,6 +159,17 @@ public class PDIdbAnalyzer {
                 } catch (FileNotFoundException ex) {
                     log.error(ex.toString(), ex);
                 }
+                
+                // Create an OutputFilter
+                PantanoOutputFilter outputFilter = null;
+                if ("4".equals(mode)) {
+                    try {
+                        outputFilter = new PantanoOutputFilter();
+                        outputFilter.parse();
+                    } catch (IOException ex) {
+                        log.error(ex.toString(), ex);
+                    }
+                }
 
                 // Create an IOutputFormatter
                 IOutputFormatter outputFormatter;
@@ -182,7 +193,7 @@ public class PDIdbAnalyzer {
                 out.println(outputFormatter.getHeader());
 
                 // Run the interaction analysis
-                InteractionAnalyzer intAnalyzer = new InteractionAnalyzer().setInteractionTyper(interactionTyper).setPdbPolymer(pdbPolymer).setOut(out).setOutputFormatter(outputFormatter).setIgnoreUnknownAtomTypes(ignoreUnknownAtomTypes);
+                InteractionAnalyzer intAnalyzer = new InteractionAnalyzer().setInteractionTyper(interactionTyper).setPdbPolymer(pdbPolymer).setOut(out).setOutputFormatter(outputFormatter).setIgnoreUnknownAtomTypes(ignoreUnknownAtomTypes).setOutputFilter(outputFilter);
                 intAnalyzer.setEffectiveOnly(effectiveOnly).setDistanceCutoff(distanceCutoff);
                 intAnalyzer.run();
 

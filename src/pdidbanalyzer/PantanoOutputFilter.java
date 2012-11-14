@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openscience.cdk.interfaces.IPDBAtom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,6 +92,19 @@ public class PantanoOutputFilter {
         
         in.close();
         return pantanoResidues;
+    }
+    
+    public boolean accept(IPDBAtom atom) {
+        for (PantanoResidue res : pantanoResidues) {
+            if (res.getResNames().contains(atom.getResName())) {
+                if (res.getAtomNames().contains(atom.getName())) {
+                    log.warn(atom + " accepted by " + PantanoOutputFilter.class.getName());
+                    return true;
+                }
+            }
+        }
+        log.warn(atom + " NOT accepted by " + PantanoOutputFilter.class.getName());
+        return false;
     }
 
 }
