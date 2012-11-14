@@ -50,6 +50,8 @@ public class CommandLineParameters {
     // Add the individual options
     options.addOption( OptionBuilder.isRequired().hasArg().withArgName("pdbFile").withDescription("name of the input PDB file or directory name").withLongOpt("file").create('f') );
     options.addOption( OptionBuilder.hasArg().withArgName("mode").withDescription("1: Original PDIdb mode (default), 2: Extended mode, 3: Extended mode with HBPLUS").withLongOpt("mode").create('m') );
+    options.addOption( OptionBuilder.withDescription("disable effective interactions").withLongOpt("noeff").create('n') );
+    options.addOption( OptionBuilder.hasArg().withArgName("cutoff").withDescription("distance cutoff in angstrom (default: 7.0)").withLongOpt("distance").create('d') );
     options.addOption( OptionBuilder.withDescription("displays this help text").withLongOpt("help").create('h') );
     options.addOption( OptionBuilder.withDescription("displays version information and exits").withLongOpt("version").create('v') );
   }
@@ -115,7 +117,7 @@ public class CommandLineParameters {
    * Returns whether the version option has been provided at the command line.
    * @return true if the version option has been provided at the command line, false otherwise.
    */
-  boolean getVersionOption() {
+  public boolean getVersionOption() {
     return commandLine.hasOption('v');
   }
   
@@ -123,7 +125,7 @@ public class CommandLineParameters {
    * Returns whether the help option has been provided at the command line.
    * @return true if the help option has been provided at the command line, false otherwise.
    */
-  boolean getHelpOption() {
+  public boolean getHelpOption() {
     return commandLine.hasOption('h');
   }
   
@@ -131,7 +133,7 @@ public class CommandLineParameters {
    * Returns the name of the input PDB file or directory name.
    * @return the name of the input PDB file or directory name
    */
-  String getPdbFileOption() {
+  public String getPdbFileOption() {
     return commandLine.getOptionValue("f").trim();
   }
 
@@ -139,11 +141,31 @@ public class CommandLineParameters {
    * Returns the operation mode 1: Original PDIdb mode (default), 2: Extended mode.
    * @return the operation mode
    */
-  String getModeOption() {
+  public String getModeOption() {
       if (commandLine.getOptionValue("m") != null)
           return commandLine.getOptionValue("m").trim();
       else
           return "1"; // default value
+  }
+  
+  /**
+   * Returns whether the noeff (no effective interactions) option has been provided at the command line.
+   * @return true if the noeff option has been provided at the command line, false otherwise.
+   */
+  public boolean getNoeffOption() {
+    return commandLine.hasOption('n');
+  }
+
+  /**
+   * Returns the distance cutoff in angstrom. The condition test is distance
+   * <= cutoff. The default is 7.0 angstrom.
+   * @return the distance cutoff
+   */
+  public double getDistanceOption() {
+      if (commandLine.getOptionValue("d") != null)
+          return Double.valueOf(commandLine.getOptionValue("d"));
+      else
+          return 7.0; // default value
   }
   
 }

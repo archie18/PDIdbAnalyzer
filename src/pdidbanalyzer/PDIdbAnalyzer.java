@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
+ *     2012-11-13    0.4      
  *     2012-06-28    0.3      Added mode -m 3 HBPLUS functionality for distance
  *                            and angle dependent hydrogen bond detection
  *                            Co-author: Felipe Erices
@@ -45,7 +46,7 @@ public class PDIdbAnalyzer {
     private static final Logger log = LoggerFactory.getLogger(PDIdbAnalyzer.class);
     
     /** The version string of this project */
-    public final static String version = "0.3";
+    public final static String version = "0.4";
 
 
     /**
@@ -68,6 +69,8 @@ public class PDIdbAnalyzer {
           clParams.printVersion();
         File pdbInput = new File(clParams.getPdbFileOption());
         String mode = clParams.getModeOption();
+        boolean effectiveOnly = !clParams.getNoeffOption();
+        double distanceCutoff = clParams.getDistanceOption();
     
         IChemObjectBuilder builder = DefaultChemObjectBuilder.getInstance();
         
@@ -159,10 +162,11 @@ public class PDIdbAnalyzer {
 
                 // Create an IOutputFormatter
                 IOutputFormatter outputFormatter;
-                if ("2".equals(mode) || "3".equals(mode))
-                    outputFormatter = new AndyOutputFormatter();
-                else
+                if ("1".equals(mode)) {
                     outputFormatter = new PDIdbOutputFormatter();
+                } else {
+                    outputFormatter = new AndyOutputFormatter2();
+                }
 
                 // Create an IInteractionTyper
                 IInteractionTyper interactionTyper;
@@ -179,6 +183,7 @@ public class PDIdbAnalyzer {
 
                 // Run the interaction analysis
                 InteractionAnalyzer intAnalyzer = new InteractionAnalyzer().setInteractionTyper(interactionTyper).setPdbPolymer(pdbPolymer).setOut(out).setOutputFormatter(outputFormatter).setIgnoreUnknownAtomTypes(ignoreUnknownAtomTypes);
+                intAnalyzer.setEffectiveOnly(effectiveOnly).setDistanceCutoff(distanceCutoff);
                 intAnalyzer.run();
 
                 // Close the output stream

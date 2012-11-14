@@ -28,7 +28,10 @@ public class InteractionAnalyzer {
     /** Maximum distance to consider (in Angstrom) */
     private double distanceCutoff = 7.0;
     
-    /** Omega angle for effective interactions. Defaults to 90 degrees */
+    /** Calculate only effectiveOnly interactions */
+    private boolean effectiveOnly = true;
+    
+    /** Omega angle for effectiveOnly interactions. Defaults to 90 degrees */
     private double omega = Math.PI / 2.0;
 
     /** The PDB polymer */
@@ -49,7 +52,7 @@ public class InteractionAnalyzer {
     /** InteractionTyper */
     private IInteractionTyper interactionTyper;
 
-    /** Ignore unknown (null) atomtypes in effective interactions */
+    /** Ignore unknown (null) atomtypes in effectiveOnly interactions */
     private boolean ignoreUnknownAtomTypes = true;
 
     
@@ -72,7 +75,7 @@ public class InteractionAnalyzer {
     }
     
     /**
-     * Sets the distance cut-off used to determined effective interactions
+     * Sets the distance cut-off used to determine effectiveOnly interactions
      * @param distanceCutoff the distance cut-off in Angstrom
      * @return this object
      */
@@ -81,7 +84,17 @@ public class InteractionAnalyzer {
         return this;
     }
 
-    /** Sets the omega angle for effective interactions (in radians)
+    /**
+     * If true, only effective interactions are considered (default)
+     * @param effectiveOnly set true to consider only effective interactions
+     * @return this object
+     */
+    public InteractionAnalyzer setEffectiveOnly(boolean effectiveOnly) {
+        this.effectiveOnly = effectiveOnly;
+        return this;
+    }
+
+    /** Sets the omega angle for effectiveOnly interactions (in radians)
      * @param omega the omega to set (in radians)
      * @return this object 
      */
@@ -108,7 +121,7 @@ public class InteractionAnalyzer {
     }
 
     /**
-     * Ignores unknown (null) atom types in effective interaction calculations
+     * Ignores unknown (null) atom types in effectiveOnly interaction calculations
      * @param ignoreUnknownAtomTypes
      */
     public InteractionAnalyzer setIgnoreUnknownAtomTypes(boolean ignoreUnknownAtomTypes) {
@@ -117,7 +130,7 @@ public class InteractionAnalyzer {
     }
 
     /**
-     * Returns true if unknown (null) atom types are ignored in effective
+     * Returns true if unknown (null) atom types are ignored in effectiveOnly
      * interaction calculations
      * @return
      */
@@ -165,8 +178,8 @@ public class InteractionAnalyzer {
     /**
      * Performs the interaction analysis. Only interactions between typed DNA
      * and protein atoms are analysed. However, if
-     * <code>ignoreUnknownAtomTypes<code> is true other atoms (e.g. HETATM,
-     * waters...) will be taken into account when determining effective
+     * <code>ignoreUnknownAtomTypes<code> is false, other atoms (e.g. HETATM,
+     * waters...) will be taken into account when determining effectiveOnly
      * interactions. If this is not desired <code>ignoreUnknownAtomTypes<code>
      * should be set true (default) or these atoms should be removed prior to
      * calling this method.
@@ -209,8 +222,8 @@ public class InteractionAnalyzer {
                 }
                 
                 // Ensure that distance <= distanceCutoff and that the
-                // interaction is effective.
-                if (getDistance(i, j) <= distanceCutoff && isEffectiveInteraction(i, j)) {
+                // interaction is effectiveOnly.
+                if (getDistance(i, j) <= distanceCutoff && (!effectiveOnly || isEffectiveInteraction(i, j))) {
                     log.debug("Found effective interaction within cutoff range");
                     IInteractionType intType = interactionTyper.getInteractionType(pdbPolymer.getAtom(i), pdbPolymer.getAtom(j));
                         log.debug("Interaction type: {}", intType);
@@ -291,11 +304,11 @@ public class InteractionAnalyzer {
     }    
 
     /**
-     * Determines whether the interaction between atom1 and atom2 is effective
+     * Determines whether the interaction between atom1 and atom2 is effectiveOnly
      * according to Ferrara & Melo, Protein Science (2009) 18, 1469-1485.
      * @param atom1Idx Index of atom1
      * @param atom2idx Index of atom2
-     * @return true if the interaction is effective, false otherwise.
+     * @return true if the interaction is effectiveOnly, false otherwise.
      */
     private boolean isEffectiveInteraction(int atom1Idx, int atom2Idx) {
 
@@ -313,10 +326,10 @@ public class InteractionAnalyzer {
                 
                 // Ensure distance is within range
                 if (distance <= distanceCutoff) {
-                    // Ensure angle <= omega, if not the interaction is not effective
+                    // Ensure angle <= omega, if not the interaction is not effectiveOnly
                     double angle = InteractionAnalyzer.getAngle(pdbPolymer.getAtom(atom3Idx), pdbPolymer.getAtom(atom1Idx), pdbPolymer.getAtom(atom2Idx));
                     if (angle > omega) {
-                        // Not effective
+                        // Not effectiveOnly
                         if (log.isDebugEnabled()) {
                             log.debug("not effective");
                             IPDBAtom a = (IPDBAtom) pdbPolymer.getAtom(atom1Idx);

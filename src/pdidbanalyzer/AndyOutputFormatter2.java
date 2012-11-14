@@ -10,19 +10,28 @@ import org.openscience.cdk.interfaces.IPDBAtom;
 import org.openscience.cdk.interfaces.IPDBPolymer;
 
 /**
+ * Shall eventually replace {@link pdidbanalyzer.AndyOutputFormatter}. Outputs
+ * the PDB insertion codes, missing in the original implementation. Also fixes
+ * missing _1 and _2 suffixes for some column headers.
  * Formats the interaction analysis output according to PDIdb standards
  * @author archvile18
  */
-public class PDIdbOutputFormatter implements IOutputFormatter {
+public class AndyOutputFormatter2 implements IOutputFormatter {
     
     private String separator = "\t";
+    private CommandLineParameters clParams;
     
     /**
      * Creates new PDIdb compliant instant
      */
-    public PDIdbOutputFormatter() {
+    public AndyOutputFormatter2() {
     }
-    
+
+    public AndyOutputFormatter2 setClParams(CommandLineParameters clParams) {
+        this.clParams = clParams;
+        return this;
+    }
+
     /**
      * Generates a formatted string representation of an interaction
      * @param interactionType
@@ -50,6 +59,7 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         // First atom
         stringBuilder.append(atom1.getResName()).append(separator);
         stringBuilder.append(atom1.getResSeq()).append(separator);
+        stringBuilder.append(atom1.getICode()).append(separator);
         stringBuilder.append(atom1.getChainID()).append(separator);
         stringBuilder.append(atom1.getName()).append(separator);
         stringBuilder.append(atom1.getSymbol()).append(separator);
@@ -60,6 +70,7 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         // Second atom
         stringBuilder.append(atom2.getResName()).append(separator);
         stringBuilder.append(atom2.getResSeq()).append(separator);
+        stringBuilder.append(atom2.getICode()).append(separator);
         stringBuilder.append(atom2.getChainID()).append(separator);
         stringBuilder.append(atom2.getName()).append(separator);
         stringBuilder.append(atom2.getSymbol()).append(separator);
@@ -76,35 +87,40 @@ public class PDIdbOutputFormatter implements IOutputFormatter {
         return stringBuilder.toString();
     }
 
-    @Override
     public String getHeader() {
         // Build the header
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (original mode)").append('\n');
+        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (extended mode)").append('\n');
         stringBuilder.append("# by Andreas Schueller <aschueller@bio.puc.cl>. Based on the works of Tomas Norambuena and Francisco Melo, The Protein-DNA Interface database. BMC Bioinformatics 2010, 11, 262.").append('\n');
-        stringBuilder.append("# Detailed effective interactions").append('\n');
+        stringBuilder.append("# Effective interactions: ").append(clParams.getNoeffOption() ? "On" : "Off").append('\n');
+        stringBuilder.append("# HBPLUS H-bonds: ").append(clParams.getModeOption().equals("3") ? "On" : "Off").append('\n');
+        
+        stringBuilder.append("# Mode: ").append(clParams.getModeOption()).append('\n');
+        stringBuilder.append("# Detailed interactions").append('\n');
         stringBuilder.append("# 1: DNA; 2: Protein").append('\n');
         // First atom
         stringBuilder.append("# ");
         stringBuilder.append("ResName_1").append(separator);
         stringBuilder.append("ResIndex_1").append(separator);
+        stringBuilder.append("ICode_1").append(separator);
         stringBuilder.append("ChainID_1").append(separator);
         stringBuilder.append("AtmName_1").append(separator);
-        stringBuilder.append("Element").append(separator);
-        stringBuilder.append("AtmIndex").append(separator);
-        stringBuilder.append("Coord_x").append(separator);
-        stringBuilder.append("Coord_y").append(separator);
-        stringBuilder.append("Coord_z").append(separator);
+        stringBuilder.append("Element_1").append(separator);
+        stringBuilder.append("AtmIndex_1").append(separator);
+        stringBuilder.append("Coord_x_1").append(separator);
+        stringBuilder.append("Coord_y_1").append(separator);
+        stringBuilder.append("Coord_z_1").append(separator);
         // Second atom
         stringBuilder.append("ResName_2").append(separator);
         stringBuilder.append("ResIndex_2").append(separator);
+        stringBuilder.append("ICode_2").append(separator);
         stringBuilder.append("ChainID_2").append(separator);
         stringBuilder.append("AtmName_2").append(separator);
-        stringBuilder.append("Element").append(separator);
-        stringBuilder.append("AtmIndex").append(separator);
-        stringBuilder.append("Coord_x").append(separator);
-        stringBuilder.append("Coord_y").append(separator);
-        stringBuilder.append("Coord_z").append(separator);
+        stringBuilder.append("Element_2").append(separator);
+        stringBuilder.append("AtmIndex_2").append(separator);
+        stringBuilder.append("Coord_x_2").append(separator);
+        stringBuilder.append("Coord_y_2").append(separator);
+        stringBuilder.append("Coord_z_").append(separator);
         // Interaction information
         stringBuilder.append("Distance").append(separator);
         stringBuilder.append("Interaction_Type").append(separator);
