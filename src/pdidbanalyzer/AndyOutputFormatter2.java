@@ -92,11 +92,11 @@ public class AndyOutputFormatter2 implements IOutputFormatter {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (extended mode)").append('\n');
         stringBuilder.append("# by Andreas Schueller <aschueller@bio.puc.cl>. Based on the works of Tomas Norambuena and Francisco Melo, The Protein-DNA Interface database. BMC Bioinformatics 2010, 11, 262.").append('\n');
-        stringBuilder.append("# Effective interactions: ").append(clParams.getNoeffOption() ? "On" : "Off").append('\n');
+        stringBuilder.append("# Effective interactions: ").append(clParams.getNoeffOption() ? "Off" : "On").append('\n');
         stringBuilder.append("# HBPLUS H-bonds: ").append(clParams.getModeOption().equals("3") ? "On" : "Off").append('\n');
-        
+        stringBuilder.append("# Distance cut-off: ").append(clParams.getDistanceOption()).append('\n');
         stringBuilder.append("# Mode: ").append(clParams.getModeOption()).append('\n');
-        stringBuilder.append("# Detailed interactions").append('\n');
+        stringBuilder.append("# Detailed interactions:").append('\n');
         stringBuilder.append("# 1: DNA; 2: Protein").append('\n');
         // First atom
         stringBuilder.append("# ");

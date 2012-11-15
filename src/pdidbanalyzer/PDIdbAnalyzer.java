@@ -176,18 +176,18 @@ public class PDIdbAnalyzer {
                 if ("1".equals(mode)) {
                     outputFormatter = new PDIdbOutputFormatter();
                 } else {
-                    outputFormatter = new AndyOutputFormatter2();
+                    outputFormatter = new AndyOutputFormatter2().setClParams(clParams);
                 }
 
                 // Create an IInteractionTyper
                 IInteractionTyper interactionTyper;
-                if ("2".equals(mode))
-                    interactionTyper = new AndyInteractionTyper();
-                else if ("3".equals(mode))
-                    interactionTyper = new AndyInteractionTyper().setHBPlus(hbPlus);
-                else
+                if ("1".equals(mode)) {
                     interactionTyper = new PDIdbInteractionTyper();
-
+                } else if ("3".equals(mode)) {
+                    interactionTyper = new AndyInteractionTyper().setHBPlus(hbPlus);
+                } else {
+                    interactionTyper = new AndyInteractionTyper();
+                }
 
                 // Print header line
                 out.println(outputFormatter.getHeader());

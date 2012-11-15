@@ -56,12 +56,12 @@ public class PantanoOutputFilter {
         while ((line = in.readLine()) != null) {
             line = line.trim();
 
-            // Skip comments
-            if ('#' == line.charAt(0)) {
-                continue;
-            }
             // Skip empty lines
             if ("".equals(line)) {
+                continue;
+            }
+            // Skip comments
+            if ('#' == line.charAt(0)) {
                 continue;
             }
 
@@ -76,7 +76,7 @@ public class PantanoOutputFilter {
                 
                 // Add residue names
                 List<String> resNames = Arrays.asList(line.split(" "));
-                resNames.remove(0); // Removes ALLNAME
+                resNames = resNames.subList(1, resNames.size()); // Removes ALLNAME
                 res.setResNames(resNames);
                 //Initialize list of atom names
                 res.setAtomNames(new ArrayList<String>());
@@ -98,12 +98,16 @@ public class PantanoOutputFilter {
         for (PantanoResidue res : pantanoResidues) {
             if (res.getResNames().contains(atom.getResName())) {
                 if (res.getAtomNames().contains(atom.getName())) {
-                    log.warn(atom + " accepted by " + PantanoOutputFilter.class.getName());
+                    if (log.isInfoEnabled()) {
+                        log.trace(atom.getChainID() + " " + atom.getResName() + " " + atom.getResSeq() + " " + atom.getName() + atom.getICode() + " accepted by " + PantanoOutputFilter.class.getName());
+                    }
                     return true;
                 }
             }
         }
-        log.warn(atom + " NOT accepted by " + PantanoOutputFilter.class.getName());
+        if (log.isInfoEnabled()) {
+            log.trace(atom.getChainID() + " " + atom.getResName() + " " + atom.getResSeq() + " " + atom.getName() + atom.getICode() + " NOT accepted by " + PantanoOutputFilter.class.getName());
+        }
         return false;
     }
 
