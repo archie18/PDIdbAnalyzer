@@ -4,10 +4,7 @@
  */
 package pdidbanalyzer;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,10 +22,10 @@ public class PantanoOutputFilter {
     private static final Logger log = LoggerFactory.getLogger(PantanoOutputFilter.class);
     
     /** DNA map file */
-    private String dnaMapFilename = "data/ADN_atoms.map";
+    private String dnaMapFilename = "resources/ADN_atoms.map"; // Do NOT add a leading slash
     
     /** Protein map file */
-    private String protMapFilename = "data/Prot_atoms.map";
+    private String protMapFilename = "resources/Prot_atoms.map"; // Do NOT add a leading slash
     
     /** Pantano group mapped residues */
     private List<PantanoResidue> pantanoResidues;
@@ -49,7 +46,8 @@ public class PantanoOutputFilter {
      */
     private List<PantanoResidue> parse(String filename) throws IOException {
         List<PantanoResidue> pantanoResidues = new ArrayList<PantanoResidue>();
-        BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+        //BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(filename)));
 
         PantanoResidue res = null;
         String line;

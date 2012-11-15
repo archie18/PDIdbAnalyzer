@@ -158,6 +158,7 @@ public class PDIdbAnalyzer {
                     out = new PrintStream(FilenameUtils.getBaseName(filename) + ".dat");
                 } catch (FileNotFoundException ex) {
                     log.error(ex.toString(), ex);
+                    System.exit(1);
                 }
                 
                 // Create an OutputFilter
@@ -168,6 +169,7 @@ public class PDIdbAnalyzer {
                         outputFilter.parse();
                     } catch (IOException ex) {
                         log.error(ex.toString(), ex);
+                        System.exit(1);
                     }
                 }
 
