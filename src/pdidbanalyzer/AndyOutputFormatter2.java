@@ -5,7 +5,10 @@
 
 package pdidbanalyzer;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.openscience.cdk.interfaces.IPDBAtom;
 import org.openscience.cdk.interfaces.IPDBPolymer;
 
@@ -88,9 +91,10 @@ public class AndyOutputFormatter2 implements IOutputFormatter {
     }
 
     public String getHeader() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         // Build the header
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (extended mode)").append('\n');
+        stringBuilder.append("# PDIdb analysis by PDIdbAnalyzer.jar v").append(PDIdbAnalyzer.version).append(" (extended mode)").append(" (Current time: ").append(dateFormat.format(new Date())).append(")").append('\n');
         stringBuilder.append("# by Andreas Schueller <aschueller@bio.puc.cl>. Based on the works of Tomas Norambuena and Francisco Melo, The Protein-DNA Interface database. BMC Bioinformatics 2010, 11, 262.").append('\n');
         stringBuilder.append("# Effective interactions: ").append(clParams.getNoeffOption() ? "Off" : "On").append('\n');
         stringBuilder.append("# HBPLUS H-bonds: ").append(clParams.getModeOption().equals("3") ? "On" : "Off").append('\n');

@@ -59,6 +59,8 @@ public class PDIdbAnalyzer {
 
         // Ignore unknown (null) atom types in effective interactions?
         boolean ignoreUnknownAtomTypes = true;
+        
+        log.info("PDIdbAnalyzer v" + PDIdbAnalyzer.version + " by Andreas Schueller <aschueller@bio.puc.cl> - Copyright (c) 2011 Andreas Schueller, Santiago, Chile");
 
         // Parse command line arguments
         CommandLineParameters clParams = new CommandLineParameters();
