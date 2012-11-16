@@ -1,0 +1,9 @@
+HEADER    FOURATOMS
+ATOM      1  CA  ALA A   1       0.000   0.000   0.000  1.00  0.00           C  
+ATOM      2  CB  ALA A   2       1.000   0.000   0.000  1.00  0.00           C  
+ATOM      3  CA  ALA A   3       2.000   0.000   0.000  1.00  0.00           C  
+TER       4      ALA     3
+ATOM      4  P    DC B 100       0.000   1.000   0.000  1.00  0.00           P1+
+ATOM      5  OP1  DC B 101       1.000   1.000   0.000  1.00  0.00           O1-
+ATOM      6  P    DC B 102       2.000   1.000   0.000  1.00  0.00           P1+
+TER       7       DC   102
