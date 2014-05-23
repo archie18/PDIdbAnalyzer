@@ -22,10 +22,12 @@ public class PantanoOutputFilter {
     private static final Logger log = LoggerFactory.getLogger(PantanoOutputFilter.class);
     
     /** DNA map file */
-    private String dnaMapFilename = "resources/ADN_atoms.map"; // Do NOT add a leading slash
+//    private String dnaMapFilename = "resources/ADN_atoms.map"; // Do NOT add a leading slash
+    private String dnaMapFilename = "resources/sirah_dna.dat"; // Do NOT add a leading slash
     
     /** Protein map file */
-    private String protMapFilename = "resources/Prot_atoms.map"; // Do NOT add a leading slash
+//    private String protMapFilename = "resources/Prot_atoms.map"; // Do NOT add a leading slash
+    private String protMapFilename = "resources/sirah_prot.dat"; // Do NOT add a leading slash
     
     /** Pantano group mapped residues */
     private List<PantanoResidue> pantanoResidues;

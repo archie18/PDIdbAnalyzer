@@ -1,0 +1,41 @@
+# Coarse-Grained model for DNA
+# Topology information extracted from:
+# P. Dans et al. Journal of Chemical Theory and Computation (2010)  
+
+# Title: Adenine
+ALLNAME A DA DA5 DA3
+P
+C5' C5*
+C1' C1*
+C2
+N1
+N6
+  
+# Title: Thymine
+ALLNAME T DT DT5 DT3
+P
+C5' C5*
+C1' C1*
+O2
+N3
+O4
+  
+# Title: Guanine
+ALLNAME G DG DG5 DG3
+P
+C5' C5*
+C1' C1*
+N2
+N1
+O6
+  
+  
+# Title: Citosine
+ALLNAME D DC DC5 DC3
+P
+C5' C5*
+C1' C1*
+O2
+N3
+N4
+  

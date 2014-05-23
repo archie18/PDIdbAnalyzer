@@ -1,0 +1,167 @@
+# SIRAH Coarse-Grained model for proteins
+# Topology information extracted from:
+  
+# Title: ALA
+ALLNAME ALA 
+CA
+O
+N
+  
+# Title: GLY
+ALLNAME GLY 
+CA
+O
+N
+  
+# Title: ARG
+ALLNAME ARG 
+CA
+O
+N
+CG
+CZ
+NH1
+NH2
+  
+# Title: ASN
+ALLNAME ASN 
+CA
+O
+N
+CG
+OD1
+ND2
+  
+# Title: ASP
+ALLNAME ASP 
+CA
+O
+N
+CG
+OD1
+OD2
+  
+# Title: CYS
+ALLNAME CYS 
+CA
+O
+N
+SG
+HG
+  
+# Title: GLN
+ALLNAME GLN 
+CA
+O
+N
+CD
+OE1
+NE2
+  
+# Title: GLU
+ALLNAME GLU 
+CA
+O
+N
+CD
+OE1
+OE2
+  
+# Title: HIS
+ALLNAME HIS 
+CA
+O
+N
+CG
+ND1
+NE2
+NE2
+  
+# Title: ILE
+ALLNAME ILE 
+CA
+O
+N
+CG1
+  
+# Title: LEU
+ALLNAME LEU 
+CA
+O
+N
+CG
+  
+# Title: LYS
+ALLNAME LYS 
+CA
+O
+N
+CG
+CE
+  
+# Title: MET
+ALLNAME MET 
+CA
+O
+N
+SD SE
+  
+# Title: PHE
+ALLNAME PHE 
+CA
+O
+N
+CG
+CE1
+CE2
+  
+# Title: PRO
+ALLNAME PRO 
+CA
+O
+N
+CG
+  
+# Title: SER
+ALLNAME SER 
+CA
+O
+N
+OG
+HG HG1 
+  
+# Title: THR
+ALLNAME THR 
+CA
+O
+N
+OG1
+HG1 1HG
+  
+# Title: TRP
+ALLNAME TRP 
+CA
+O
+N
+CG
+NE1
+CZ2
+CE3
+HE1
+  
+# Title: TYR
+ALLNAME TYR 
+CA
+O
+N
+CG
+CE1
+CE2
+OH
+  
+# Title: VAL
+ALLNAME VAL 
+CA
+O
+N
+CB

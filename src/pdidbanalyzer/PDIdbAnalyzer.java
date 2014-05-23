@@ -27,7 +27,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
- *     2012-11-14    0.4      
+ *     2014-05-23    0.4.1    Updated PantanoOutputFilter atom maps
+ *     2012-11-14    0.4      Added mode -m 4 Extended mode with PantanoOutputFilter
  *     2012-06-28    0.3      Added mode -m 3 HBPLUS functionality for distance
  *                            and angle dependent hydrogen bond detection
  *                            Co-author: Felipe Erices
@@ -46,7 +47,7 @@ public class PDIdbAnalyzer {
     private static final Logger log = LoggerFactory.getLogger(PDIdbAnalyzer.class);
     
     /** The version string of this project */
-    public final static String version = "0.4";
+    public final static String version = "0.4.1";
 
 
     /**
