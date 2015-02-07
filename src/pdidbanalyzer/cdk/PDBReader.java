@@ -620,7 +620,8 @@ public class PDBReader extends DefaultChemObjectReader {
 		// ATOM      1  O5*   C A   1      20.662  36.632  23.475  1.00 10.00      114D  45
   		// ATOM   1186 1H   ALA     1      10.105   5.945  -6.630  1.00  0.00      1ALE1288
 
-		if (lineLength < 59) {
+		// BUG-FIX: Changed from < 59 to < 54 which is just to the end of coordinates block
+                if (lineLength < 54) {
 			throw new RuntimeException("PDBReader error during readAtom(): line too short");
 		}
 		String elementSymbol = cLine.substring(12, 14).trim();
