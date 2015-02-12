@@ -574,8 +574,14 @@ public class PDIdbAtomTyper {
 
                     }
                     log.debug("{} {} {}", new Object[]{pdbAtom.getName(), pdbAtom.getResName(), pdbAtom.getProperty(IAtomType.class)});
-                    if (pdbAtom.getProperty(IAtomType.class) == null && (isPeptidic(pdbAtom) || isNucleic(pdbAtom) || isWater(pdbAtom)) && !"H".equals(pdbAtom.getSymbol())) {
-                        log.warn("Atom type = null. PDB file: {} Chain: {} Res: {} {} Atom: {} {} HETATM: {}", new Object[] {filename, pdbAtom.getChainID(), pdbAtom.getResName(), pdbAtom.getResSeq(), pdbAtom.getName(), pdbAtom.getSerial(), pdbAtom.getHetAtom()});
+                    if (pdbAtom.getProperty(IAtomType.class) == null) {
+                        if ((isPeptidic(pdbAtom) || isNucleic(pdbAtom) || isWater(pdbAtom)) && !"H".equals(pdbAtom.getSymbol())) {
+                            log.warn("Atom type = null. Known residue. PDB file: {} Chain: {} Res: {} {} Atom: {} {} HETATM: {}", new Object[] {filename, pdbAtom.getChainID(), pdbAtom.getResName(), pdbAtom.getResSeq(), pdbAtom.getName(), pdbAtom.getSerial(), pdbAtom.getHetAtom()});
+                        } else if ("H".equals(pdbAtom.getSymbol())) {
+                            log.debug("Atom type = null. Ignoring hydrogens. PDB file: {} Chain: {} Res: {} {} Atom: {} {} HETATM: {}", new Object[] {filename, pdbAtom.getChainID(), pdbAtom.getResName(), pdbAtom.getResSeq(), pdbAtom.getName(), pdbAtom.getSerial(), pdbAtom.getHetAtom()});
+                        } else {
+                            log.warn("Atom type = null. Unknown residue. PDB file: {} Chain: {} Res: {} {} Atom: {} {} HETATM: {}", new Object[] {filename, pdbAtom.getChainID(), pdbAtom.getResName(), pdbAtom.getResSeq(), pdbAtom.getName(), pdbAtom.getSerial(), pdbAtom.getHetAtom()});
+                        }
                     }
                 }
                 if (isFirstResidue && !monomerId.equals("")) {
