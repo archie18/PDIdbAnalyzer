@@ -27,6 +27,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
+ *     2015-02-07    0.4.2    Changed PDB minimum line length from 59 to 54
+ *                            which is just to the end of coordinates block.
+ *                            Added more verbose logger output in case of null
+ *                            atom type.
  *     2014-05-23    0.4.1    Updated PantanoOutputFilter atom maps
  *     2012-11-14    0.4      Added mode -m 4 Extended mode with PantanoOutputFilter
  *     2012-06-28    0.3      Added mode -m 3 HBPLUS functionality for distance
@@ -47,7 +51,7 @@ public class PDIdbAnalyzer {
     private static final Logger log = LoggerFactory.getLogger(PDIdbAnalyzer.class);
     
     /** The version string of this project */
-    public final static String version = "0.4.1";
+    public final static String version = "0.4.2";
 
 
     /**
