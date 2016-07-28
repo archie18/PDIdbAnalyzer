@@ -27,6 +27,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PROJECT HISTORY
+ *     2016-07-28    0.4.3    Fixed some issues in the unit tests. Apparently,
+ *                            I did not ran the tests in a long time and some
+ *                            were buggy. Only minor issues, though.
  *     2015-02-07    0.4.2    Changed PDB minimum line length from 59 to 54
  *                            which is just to the end of coordinates block.
  *                            Added more verbose logger output in case of null
@@ -51,7 +54,7 @@ public class PDIdbAnalyzer {
     private static final Logger log = LoggerFactory.getLogger(PDIdbAnalyzer.class);
     
     /** The version string of this project */
-    public final static String version = "0.4.2";
+    public final static String version = "0.4.3";
 
 
     /**
