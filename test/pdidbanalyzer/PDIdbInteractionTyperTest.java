@@ -784,67 +784,11 @@ public class PDIdbInteractionTyperTest {
     public void testGetInteractionType16() {
         System.out.println("getInteractionType16");
 
-        IAtom atom1 = setupAtom(PDIdbDNAAtomType.C8);
+        IAtom atom1 = setupAtom(PDIdbDNAAtomType.CC5);
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
         IInteractionType result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.C8);
-        atom2 = setupAtom(PDIdbProteinAtomType.TYR_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.C8);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASN_GLN_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.C8);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.TYR_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASN_GLN_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.CC5);
-        atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
         atom1 = setupAtom(PDIdbDNAAtomType.CC5);
@@ -868,28 +812,28 @@ public class PDIdbInteractionTyperTest {
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
         
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.SER_THR_O);
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.TYR_O);
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.ASN_GLN_O);
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O);
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PSC_CD_OA;
@@ -905,41 +849,13 @@ public class PDIdbInteractionTyperTest {
     public void testGetInteractionType17() {
         System.out.println("getInteractionType17");
 
-        IAtom atom1 = setupAtom(PDIdbDNAAtomType.C8);
+        IAtom atom1 = setupAtom(PDIdbDNAAtomType.CC5);
         IAtom atom2 = setupAtom(PDIdbProteinAtomType.O);
         PDIdbInteractionTyper instance = new PDIdbInteractionTyper();
         PDIdbInteractionType expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
         IInteractionType result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.C8);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O, "O", "OXT");
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.AC2);
-        atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O, "O", "OXT");
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
-        atom1 = setupAtom(PDIdbDNAAtomType.CC5);
-        atom2 = setupAtom(PDIdbProteinAtomType.O);
-        instance = new PDIdbInteractionTyper();
-        expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
-        result = instance.getInteractionType(atom1, atom2);
-        assertEquals(expResult, result);
-
         atom1 = setupAtom(PDIdbDNAAtomType.CC5);
         atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O, "O", "OXT");
         instance = new PDIdbInteractionTyper();
@@ -947,14 +863,14 @@ public class PDIdbInteractionTyperTest {
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.O);
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
         result = instance.getInteractionType(atom1, atom2);
         assertEquals(expResult, result);
 
-        atom1 = setupAtom(PDIdbDNAAtomType.PyC6);
+        atom1 = setupAtom(PDIdbDNAAtomType.TC7);
         atom2 = setupAtom(PDIdbProteinAtomType.ASP_GLU_O, "O", "OXT");
         instance = new PDIdbInteractionTyper();
         expResult = PDIdbInteractionType.DBE_PBB_CD_OA;
