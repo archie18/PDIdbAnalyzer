@@ -15,6 +15,7 @@ import org.openscience.cdk.Atom;
 import static org.junit.Assert.*;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IPDBPolymer;
+import org.openscience.cdk.protein.data.PDBAtom;
 import pdidbanalyzer.IAtomType;
 import pdidbanalyzer.cdk.PDBPolymer;
 
@@ -152,9 +153,9 @@ public class InteractionAnalyzerTest {
     @Test
     public void testRun() {
         System.out.println("run");
-        IAtom atom1 = new Atom("C", new Point3d(0.0, 0.0, 0.0));
-        IAtom atom2 = new Atom("C", new Point3d(1.0, 0.0, 0.0));
-        IAtom atom3 = new Atom("C", new Point3d(0.0, 2.0, 0.0));
+        IAtom atom1 = new PDBAtom("C", new Point3d(0.0, 0.0, 0.0));
+        IAtom atom2 = new PDBAtom("C", new Point3d(1.0, 0.0, 0.0));
+        IAtom atom3 = new PDBAtom("C", new Point3d(0.0, 2.0, 0.0));
         atom1.setProperty(IAtomType.class, PDIdbProteinAtomType.ARG_CD);
         atom2.setProperty(IAtomType.class, PDIdbProteinAtomType.ARG_CD);
         atom3.setProperty(IAtomType.class, PDIdbDNAAtomType.AC2);
@@ -165,9 +166,9 @@ public class InteractionAnalyzerTest {
         InteractionAnalyzer instance = new InteractionAnalyzer().setPdbPolymer(polymer);
         instance.run();
 
-        atom1 = new Atom("C", new Point3d(0.0, 0.0, 0.0));
-        atom2 = new Atom("C", new Point3d(0.1, 0.5, 0.0));
-        atom3 = new Atom("C", new Point3d(0.0, 1.0, 0.0));
+        atom1 = new PDBAtom("C", new Point3d(0.0, 0.0, 0.0));
+        atom2 = new PDBAtom("C", new Point3d(0.1, 0.5, 0.0));
+        atom3 = new PDBAtom("C", new Point3d(0.0, 1.0, 0.0));
         atom1.setProperty(IAtomType.class, PDIdbProteinAtomType.ARG_CD);
         atom2.setProperty(IAtomType.class, PDIdbProteinAtomType.ARG_CD);
         atom3.setProperty(IAtomType.class, PDIdbDNAAtomType.AC2);
